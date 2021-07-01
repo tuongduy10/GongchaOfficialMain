@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="~/Content/style/base.css">
+    <link rel="stylesheet" href="~/Content/style/header.css">
+    <link rel="stylesheet" href="~/Content/style/container.css">
+    <link rel="stylesheet" href="~/Content/style/footer.css">
+
+    <script src="~/Content/src/main.js"></script>
+    <script src="https://kit.fontawesome.com/0313cd855d.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            text-decoration: none;
+            list-style-type: none;
+            font-family: "Louis Vuitton Web","Helvetica Neue","Helvetica",Arial,sans-serif;
+        }
+        body {
+            margin: 0;
+        }
+    </style>
+    <title>Gongcha Official</title>
+
+    @*@Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="navbar-list">
+                <ul class="header__navbar-list-left">
+                    <li class="header__navbar-item-left"><a href="">EN</a></li> |
+                    <li class="header__navbar-item-left"><a href="">VN</a></li>
+                    <li class="header__navbar-item-left"><a href=""><i class="fas fa-map-marker-alt"></i> Boutiques</a></li>
+                    <li class="header__navbar-item-left"><a href=""><i class="far fa-question-circle"></i> Can her help you?</a></li>
+                    <li class="header__navbar-item-left"><a href=""><i class="fas fa-phone"></i> Customer Services</a></li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+                @*<ul class="header__navbar-list-right">
+                        <li class="header__navbar-item-right"><a href=""><i class="far fa-heart"></i></a></li>
+                        <li class="header__navbar-item-right"><a href=""><i class="fas fa-shopping-bag"></i></a></li>
+                        <li class="header__navbar-item-right"><a href=""><i class="fas fa-sign-in-alt"></i> @Html.ActionLink("Sign in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</a></li> |
+                        <li class="header__navbar-item-right"><a href=""><i class="fas fa-user-plus"></i>@Html.ActionLink("Sign up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</a></li>
+                    </ul>*@
+            </div>
+
+            <div class="logo">
+                <img src="~/Content/style/img/logo.png" alt="Error">
+            </div>
+
+            <div class="gridline">
+                <div class="menu">
+                    <ul class="header__menu-list">
+                        <li id="header__menu-item"><a href="">@Html.ActionLink("Home", "Index", "Home")</a></li>
+                        <li id="header__menu-item"><a href="">@Html.ActionLink("Women's Fashion", "Index", "Women")</a></li>
+                        <li id="header__menu-item"><a href="">Men's Fashion</a></li>
+                        <li id="header__menu-item"><a href="">Collections</a></li>
+                        <li id="header__menu-item"><a href="">Make-Up</a></li>
+                        <li id="header__menu-item"><a href="">Skincare</a></li>
+                        <li id="header__menu-item"><a href="">Services</a></li>
+                        <li id="header__menu-item"><i class="fas fa-search"></i> <input type="text" placeholder="Search"></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="grid">
+
+                <div>
+                    @RenderBody()
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer__navbar">
+                <div class="footer__navbar-top">
+                    <ul class="footer_list">
+                        <li id="footer-item"><a href="">Gongcha Official</a></li>
+
+                        <li id="footer-item"><a href="">E Center Hutech</a></li>
+
+                        <li id="footer-item"><a href="">Apps</a></li>
+
+                        <li id="footer-item"><a href="">Legal Notices</a></li>
+
+                        <li id="footer-item"><a href="">Contact</a></li>
+
+                        <li id="footer-item"><a href="">Careers</a></li>
+
+                        <li id="footer-item">
+                            <a href=""><i class="fab fa-facebook-f">&nbsp;&nbsp;</i></a>
+                            <a href=""><i class="fab fa-instagram">&nbsp;&nbsp;</i></a>
+                            <a href=""><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer__navbar-bottom">
+                    <ul>
+                        <li>Copyright <i class="far fa-copyright"></i> 2021 Gongcha Official</li>
+                        <li><a href=""><i id="mail-icon" class="fas fa-envelope"></i>&nbsp;service@gongcha.com.vn</a></li>
+                        <li>Designed & Developed by: <img src="~/Content/style/img/mysign.png" alt="" style="height: 50px; position: relative;bottom: -19px;"></li>
+                    </ul>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

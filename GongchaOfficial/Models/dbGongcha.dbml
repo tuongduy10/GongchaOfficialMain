@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GongchaOfficial" Class="dbGongchaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-6QL52A3B\SQLEXPRESS;Initial Catalog=GongchaOfficial;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GongchaOfficialConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Admin" Member="Admins">
+    <Type Name="Admin">
+      <Column Name="AdminId" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AdminAccount" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AdminPassword" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AdminFunction" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bill" Member="Bills">
+    <Type Name="Bill">
+      <Column Name="BillId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BillTimeSet" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BillPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BillPaymentMethods" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="BillNote" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DiscountId" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CustomerPhoneNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="Bill_BillDetail" Member="BillDetails" ThisKey="BillId" OtherKey="BillId" Type="BillDetail" />
+      <Association Name="Customer_Bill" Member="Customer" ThisKey="CustomerPhoneNumber" OtherKey="CustomerPhoneNumer" Type="Customer" IsForeignKey="true" />
+      <Association Name="CustomerAddress_Bill" Member="CustomerAddress" ThisKey="CustomerPhoneNumber" OtherKey="CustomerPhoneNumer" Type="CustomerAddress" IsForeignKey="true" />
+      <Association Name="Discount_Bill" Member="Discount" ThisKey="DiscountId" OtherKey="DiscountId" Type="Discount" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BillDetail" Member="BillDetails">
+    <Type Name="BillDetail">
+      <Column Name="BillId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumericalOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PriceTotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ProductId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Bill_BillDetail" Member="Bill" ThisKey="BillId" OtherKey="BillId" Type="Bill" IsForeignKey="true" />
+      <Association Name="Product_BillDetail" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Category" Member="Categories">
+    <Type Name="Category">
+      <Column Name="CategoryId" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CategoryName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CategoryStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SexId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CollectionId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Category_Product" Member="Products" ThisKey="CategoryId" OtherKey="CategoryId" Type="Product" />
+      <Association Name="Collection_Category" Member="Collection" ThisKey="CollectionId" OtherKey="CollectionId" Type="Collection" IsForeignKey="true" />
+      <Association Name="Sex_Category" Member="Sex" ThisKey="SexId" OtherKey="SexId" Type="Sex" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Collections" Member="Collections">
+    <Type Name="Collection">
+      <Column Name="CollectionId" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CollectionName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CollectionReleaseDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CollectionStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Collection_Category" Member="Categories" ThisKey="CollectionId" OtherKey="CollectionId" Type="Category" />
+      <Association Name="Collection_Product" Member="Products" ThisKey="CollectionId" OtherKey="CollectionId" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustomerPhoneNumer" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerPassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CustomerDateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CustomerSex" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CustomerMail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Customer_Bill" Member="Bills" ThisKey="CustomerPhoneNumer" OtherKey="CustomerPhoneNumber" Type="Bill" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerAddress" Member="CustomerAddresses">
+    <Type Name="CustomerAddress">
+      <Column Name="CustomerPhoneNumer" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AddressNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="AddressStreet" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="AddressWard" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="AddressDistrict" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="AddressProvince" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="CustomerAddress_Bill" Member="Bills" ThisKey="CustomerPhoneNumer" OtherKey="CustomerPhoneNumber" Type="Bill" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Discount" Member="Discounts">
+    <Type Name="Discount">
+      <Column Name="DiscountId" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DiscountMethods" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DiscountValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiscountStatus" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Discount_Bill" Member="Bills" ThisKey="DiscountId" OtherKey="DiscountId" Type="Bill" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product" Member="Products">
+    <Type Name="Product">
+      <Column Name="ProductId" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductPrice" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ProductSize" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ProductImage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ProductReleaseDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ProductStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CategoryId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SexId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CollectionId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Product_BillDetail" Member="BillDetails" ThisKey="ProductId" OtherKey="ProductId" Type="BillDetail" />
+      <Association Name="Category_Product" Member="Category" ThisKey="CategoryId" OtherKey="CategoryId" Type="Category" IsForeignKey="true" />
+      <Association Name="Collection_Product" Member="Collection" ThisKey="CollectionId" OtherKey="CollectionId" Type="Collection" IsForeignKey="true" />
+      <Association Name="Sex_Product" Member="Sex" ThisKey="SexId" OtherKey="SexId" Type="Sex" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sex" Member="Sexes">
+    <Type Name="Sex">
+      <Column Name="SexId" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Sex" Member="Sex1" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Sex_Category" Member="Categories" ThisKey="SexId" OtherKey="SexId" Type="Category" />
+      <Association Name="Sex_Product" Member="Products" ThisKey="SexId" OtherKey="SexId" Type="Product" />
+    </Type>
+  </Table>
+</Database>

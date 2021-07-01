@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GongchaOfficial.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
+}
+<div class="underslider">
+    <h2>MAKE YOUR DAY!</h4>
+</div>
+<!-- Phân loại -->
+<div class="grid__row">
+    <div class="category">
+        <div class="category-title">
+            <h2><a href="@Url.Action("Index","Women")">Menu</a></h2>
+        </div>
+        <div class="category-list">
+            @Html.Action("Category", "Women")
+        </div>
+    </div>
+
+    <div class="product-list">
+
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action("ProductDetail","Detail", new {id = item.ProductId})">
+                <div class="product">
+                    <div class="product-content" style="height: 250px;">
+                        <div class="product-media" style="height: 250px;">
+                            <div class="product-video">
+                                <a href="@Url.Action("ProductDetail","Detail", new {id = item.ProductId})"><img src="~/Content/style/img/@item.ProductImage"></img></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-nameprice">
+                        <li><a class="product-name" href="@Url.Action("ProductDetail","Detail", new {id = item.ProductId})" style="font-weight: bold;">@item.ProductName</a></li>
+                        <li><a class="product-price" href="@Url.Action("ProductDetail","Detail", new {id = item.ProductId})">@item.ProductPrice @*@String.Format("{0:0,0 VNĐ}",20000000)*@</a></li>
+                    </div>
+                </div>
+            </a>         
+         }
+
+       
+    </div>
+
+</div>

@@ -1,0 +1,5 @@
+﻿@model IEnumerable<GongchaOfficial.Models.Category>
+@foreach (var item in Model)
+{   
+    <li class="category-item"><a href="@Url.Action("Index","Women", new {id = item.CategoryId})">@item.CategoryName</a></li>
+}

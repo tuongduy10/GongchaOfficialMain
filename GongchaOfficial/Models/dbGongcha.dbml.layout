@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 12.5" name="dbGongcha">
+  <DataContextMoniker Name="/dbGongchaDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9c93bf35-186c-406f-83dd-0b0c66c9d4c8" absoluteBounds="6.75, 4.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/dbGongchaDataContext/Admin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f7df35f-3b67-4428-9ba9-af8e319c201e" absoluteBounds="6.765, 5.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6ed5d92c-1f3d-465f-81f4-fbac005bb35f" absoluteBounds="6.25, 7.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/dbGongchaDataContext/Bill" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6a4350bb-5e54-4625-b869-a90a96fc0bbe" absoluteBounds="6.265, 8.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="51fae623-313f-48b4-8085-dc4d70338650" absoluteBounds="9, 1.375, 2, 1.9631982421874998">
+      <DataClassMoniker Name="/dbGongchaDataContext/BillDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0870ddfb-c025-4acf-b9df-5669997baa35" absoluteBounds="9.015, 1.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6a382646-e7ac-424c-88b9-2b9e1d95dc39" absoluteBounds="3.5, 1.5, 2, 1.7708968098958333">
+      <DataClassMoniker Name="/dbGongchaDataContext/Category" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a7ceba98-209d-49bc-a865-57f981a8f636" absoluteBounds="3.515, 1.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="825f7bc8-2dc5-4b19-9e39-b07d0caa2af7" absoluteBounds="0.75, 5.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/dbGongchaDataContext/Collection" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f12cb34b-cc12-426f-b190-608ddb7d104e" absoluteBounds="0.765, 5.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4452fca3-70ea-4fe0-a81a-70afd8478933" absoluteBounds="3.5, 7.5, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/dbGongchaDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bc4d4195-9eba-41b4-8025-f487070fd21d" absoluteBounds="3.515, 7.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0fbd844d-2c42-4faa-8dd1-37d151c31af6" absoluteBounds="3.5, 10.25, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/dbGongchaDataContext/CustomerAddress" />
+      <nestedChildShapes>
+        <elementListCompartment Id="45f2f304-24f9-4dc3-801c-2e4ec72af329" absoluteBounds="3.515, 10.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="92460508-e549-402c-bb6f-4da938510adb" absoluteBounds="3.5, 5.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/dbGongchaDataContext/Discount" />
+      <nestedChildShapes>
+        <elementListCompartment Id="20d1d67d-71a1-4065-ac44-cb315645e816" absoluteBounds="3.515, 5.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c6fa825b-49f0-41c4-9dd5-5626ee4b72fb" absoluteBounds="6.25, 1, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/dbGongchaDataContext/Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e6b62629-361e-4ea7-9af4-7ed49431ebb9" absoluteBounds="6.265, 1.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c6425cd9-1826-4583-9247-51e337842a11" absoluteBounds="0.75, 1.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/dbGongchaDataContext/Sex" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a02d4e43-238f-4ceb-8af3-b41280a7979f" absoluteBounds="0.765, 2.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 8.70274983723958); (10 : 8.70274983723958); (10 : 3.3381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Bill/Bill_BillDetail" />
+      <nodes>
+        <classShapeMoniker Id="6ed5d92c-1f3d-465f-81f4-fbac005bb35f" />
+        <classShapeMoniker Id="51fae623-313f-48b4-8085-dc4d70338650" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.50121330413662); (3.125 : 5.12621330413662); (3.125 : 2.38544840494792); (3.5 : 2.38544840494792)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Collection/Collection_Category" />
+      <nodes>
+        <classShapeMoniker Id="825f7bc8-2dc5-4b19-9e39-b07d0caa2af7" />
+        <classShapeMoniker Id="6a382646-e7ac-424c-88b9-2b9e1d95dc39" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 8.54409912109375); (6.25 : 8.54409912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Customer/Customer_Bill" />
+      <nodes>
+        <classShapeMoniker Id="4452fca3-70ea-4fe0-a81a-70afd8478933" />
+        <classShapeMoniker Id="6ed5d92c-1f3d-465f-81f4-fbac005bb35f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 11.2315991210937); (7.25 : 11.2315991210937); (7.25 : 9.78049967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/CustomerAddress/CustomerAddress_Bill" />
+      <nodes>
+        <classShapeMoniker Id="0fbd844d-2c42-4faa-8dd1-37d151c31af6" />
+        <classShapeMoniker Id="6ed5d92c-1f3d-465f-81f4-fbac005bb35f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.60984537760417); (6.27604166666667 : 6.60984537760417 : JumpStart); (6.44270833333333 : 6.60984537760417 : JumpEnd); (6.46875 : 6.60984537760417); (6.46875 : 7.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Discount/Discount_Bill" />
+      <nodes>
+        <classShapeMoniker Id="92460508-e549-402c-bb6f-4da938510adb" />
+        <classShapeMoniker Id="6ed5d92c-1f3d-465f-81f4-fbac005bb35f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 2.35659912109375); (9 : 2.35659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Product/Product_BillDetail" />
+      <nodes>
+        <classShapeMoniker Id="c6fa825b-49f0-41c4-9dd5-5626ee4b72fb" />
+        <classShapeMoniker Id="51fae623-313f-48b4-8085-dc4d70338650" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 2.38544840494792); (6.25 : 2.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Category/Category_Product" />
+      <nodes>
+        <classShapeMoniker Id="6a382646-e7ac-424c-88b9-2b9e1d95dc39" />
+        <classShapeMoniker Id="c6fa825b-49f0-41c4-9dd5-5626ee4b72fb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.98484537760417); (6.359375 : 6.98484537760417); (6.359375 : 3.73240397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Collection/Collection_Product" />
+      <nodes>
+        <classShapeMoniker Id="825f7bc8-2dc5-4b19-9e39-b07d0caa2af7" />
+        <classShapeMoniker Id="c6fa825b-49f0-41c4-9dd5-5626ee4b72fb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.00522420247396); (3.5 : 2.00522420247396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Sex/Sex_Category" />
+      <nodes>
+        <classShapeMoniker Id="c6425cd9-1826-4583-9247-51e337842a11" />
+        <classShapeMoniker Id="6a382646-e7ac-424c-88b9-2b9e1d95dc39" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 2.94399251302083); (1.75 : 3.532900390625); (3.04166666666667 : 3.532900390625 : JumpStart); (3.20833333333333 : 3.532900390625 : JumpEnd); (6.25 : 3.532900390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/dbGongchaDataContext/Sex/Sex_Product" />
+      <nodes>
+        <classShapeMoniker Id="c6425cd9-1826-4583-9247-51e337842a11" />
+        <classShapeMoniker Id="c6fa825b-49f0-41c4-9dd5-5626ee4b72fb" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

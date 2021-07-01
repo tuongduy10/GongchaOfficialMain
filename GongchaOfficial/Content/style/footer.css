@@ -1,0 +1,60 @@
+.footer{
+    width: max;
+    
+    background-image: linear-gradient(0,#333,#19110b);
+    text-decoration: none;
+}
+.footer__navbar{
+    text-align: center;
+}
+.footer__navbar li a{
+    font-weight: 550;
+    color: rgb(226, 226, 226);
+    font-size: 16px;
+    text-transform: capitalize;
+    font-family: "Myriad Pro",PTSansCaptionRegular, arial, helvetica, sans-serif;
+}
+/* Navbar: Top */
+.footer__navbar-top{
+    width:1400px;
+    margin:0 auto;
+    border-bottom: 0.5px solid rgb(168, 168, 168);
+}
+.footer__navbar i{
+    color:rgb(226, 226, 226);
+}
+/* Navbar: Top list */
+.footer_list{
+    padding-left: 0;
+    padding-right: 0;
+}
+.footer__navbar-top .footer_list {
+    display: flex;
+    justify-content: space-between;
+}
+.footer_list li a{
+    line-height: 75px;     
+}
+.footer_list li i:hover,
+.footer_list li a:hover{
+    color: #b81f32;
+}
+
+/* Navbar: Bottom */
+.footer__navbar-bottom li,
+.footer__navbar-bottom li a{
+    display: inline-block; 
+
+    font-size: 15px;
+    line-height: 75px;
+    padding: 0 10px;
+
+    color: rgb(226, 226, 226);
+    
+    font-weight: 100;
+    text-transform: none;
+}
+.footer__navbar-bottom li:hover #mail-icon,
+.footer__navbar-bottom li:hover a{
+    color: #b81f32;
+}

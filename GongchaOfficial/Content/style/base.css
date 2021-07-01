@@ -1,0 +1,27 @@
+.grid{
+    width: 1400px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.grid__full-width{
+    width: 100%;
+}
+.grid__row{
+    display: flex;
+    flex-wrap: wrap;
+    margin:10px -10px 10px -10px;
+}
+.grid__column-2{
+    width: 180px;
+    margin: 10px 10px 10px 0;
+    height: 500px;
+
+    background-color: grey;
+}
+.grid__column-10{
+    width: 1000px;
+    margin: 10px 0 10px 10px;
+    background-color: chartreuse;
+}
+
+var color:primary-text-color{color: brown;}

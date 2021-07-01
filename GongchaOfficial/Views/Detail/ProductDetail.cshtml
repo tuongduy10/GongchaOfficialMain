@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="underslider">
+    <h2>MAKE YOUR DAY!</h4>
+</div>
+<!-- Phân loại -->
+<div class="grid__row">
+    <div class="category">
+        <div class="category-title">
+            <h2>Menu</h2>
+        </div>
+        <div class="category-list">
+            @Html.Action("Category", "Women")
+        </div>
+    </div>
+
+    <div class="product-list">
+        <div class="detail-img">
+            <div class="itemimg"><img src="~/Content/style/img/@Model.ProductImage" alt="Missing Image"></div>
+        </div>
+        <div class="detail-content">
+            <div class="content-left">
+                <div class="content-name"><h1>@Model.ProductName</h1></div>
+                <div class="content-price"><h2>@Model.ProductPrice</h2></div>
+                <div class="content-description">
+                    <h2>Description:</h2>
+                    <p>The Jordan Jumpman Diamond Shorts are inspired by a classic pro kit worn by Michael Jordan. Remade for easy, everyday wear, they're made from lightweight fabric with taped overlays and premium Jumpman graphics.</p>
+                </div>
+                <div class="content-review">
+                    <h2>Review:</h2>
+                    <div id="rating">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label class="full" for="star5" title="Awesome - 5 stars"></label>
+
+                        <input type="radio" id="star4half" name="rating" value="4 and a half" />
+                        <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+
+                        <input type="radio" id="star3half" name="rating" value="3 and a half" />
+                        <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label class="full" for="star3" title="Meh - 3 stars"></label>
+
+                        <input type="radio" id="star2half" name="rating" value="2 and a half" />
+                        <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                        <input type="radio" id="star1half" name="rating" value="1 and a half" />
+                        <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+
+                        <input type="radio" id="starhalf" name="rating" value="half" />
+                        <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="content-right">
+                <div class="content-color">
+                    <h2>Color: </h2>
+                    <div class="color">
+                        <input id="black-radio" type="radio"><label class="black" for="black-radio"></label>
+                        <input id="red-radio" type="radio"><label class="red" for="red-radio"></label>
+                        <input id="purple-radio" type="radio"><label class="purple" for="purple-radio"></label>
+                    </div>
+
+                </div>
+                <div class="content-size">
+                    <h2>Size:</h2>
+                    <select name="" id="">
+                        <option value="">36</option>
+                        <option value="">37</option>
+                        <option value="">38</option>
+                        <option value="">39</option>
+                        <option value="">40</option>
+                        <option value="">41</option>
+                        <option value="">42</option>
+                        <option value="">43</option>
+                        <option value="">44</option>
+                    </select>
+                </div>
+                <div class="content-amount">
+                    <h2>Amount:</h2>
+                    <input type="number" id="quantity" name="quantity" min="1" max="50">
+                </div>
+                <div class="content-add">
+                    <div class="add-to-bag">
+                        <a href=""><strong>Add to bag</strong></a>
+                    </div>
+                    <div class="add-to-fav">
+                        <a href=""><i class="far fa-heart"></i></a>
+                    </div>
+                </div>
+                <div class="content-pay">
+                    <div class="pay-link">
+                        <a href=""><strong>Pay</strong></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-listimg">
+            <div class="itemimg"><img src="~/Content/style/img/@Model.ProductImage" alt="Missing Image"></div>
+            <div class="itemimg"><img src="~/Content/style/img/@Model.ProductImage" alt="Missing Image"></div>
+            <div class="itemimg"><img src="~/Content/style/img/@Model.ProductImage" alt="Missing Image"></div>
+            <div class="itemimg"><img src="~/Content/style/img/@Model.ProductImage" alt="Missing Image"></div>
+        </div>
+    </div>
+
+</div>
