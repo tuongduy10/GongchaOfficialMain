@@ -381,21 +381,50 @@
 
 
 
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-/*reset css*/
-div, label {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    margin: 20px;
-}
-
-h1 {
-    font-size: 1.5em;
+/* Login */
+.login_local,
+.login_social {
     margin: 10px;
+    width: 690px;
 }
+.login_info {
+    margin: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 400px
+}
+.login_local p,
+.login_info input {
+    font-size: 18px
+}
+.login_local h2{
+    color: #b81f32;
+}
+
+
+
+
+
+/* Register */
+.signup-button {
+    margin-left: 50px;
+}
+.signup-button input {
+    font-weight: 100;
+    color: #333333;
+    font-size: 18px;
+    font-family: "Myriad Pro",PTSansCaptionRegular, arial, helvetica, sans-serif;
+    padding: 20px;
+    border: 1px solid #333;
+    background-color: white;
+}
+.signup-button input:hover {
+    border: 1px solid #b81f32;
+    color: #b81f32;
+    margin-left: 4px;
+}
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 /****** Style Star Rating Widget *****/
 #rating {
     border: none;

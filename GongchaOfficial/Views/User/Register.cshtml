@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="grid__row">
+    <div class="login_local">
+        <div class="login_title"><h3 style="font-weight: unset;">Join with to get more information</h3> <hr style="margin:10px 0;"></div>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <h2>Details</h2>
+            <div class="login_info"><label for="fullname"><h3>Full Name</h3></label><input type="text" name="fullname" id=""></div>@ViewData["ErrorName"]
+            <div class="login_info"><label for="dateofbirth"><h3>Date of Birth</h3></label><input type="date" name="dateofbirth" id=""></div>@ViewData["ErrorDate"]
+            <div class="login_info"><label for="sex"><h3>Sex</h3></label><input type="text" name="sex" id=""></div>@ViewData["ErrorSex"]
+            <div class="login_info"><label for="mail"><h3>Email</h3></label><input type="text" name="mail" id=""></div>@ViewData["ErrorMail"]
+
+            <h2>Login Details</h2>
+            <div class="login_info"><label for="phonenumber"><h3>Phone Number</h3></label><input type="text" name="phonenumber" id=""></div>@ViewData["Error"]
+            <div class="login_info"><label for="password"><h3>Password</h3></label><input type="password" name="password" id=""></div>@ViewData["Error"]
+            <div class="signup-button"><input type="submit" name="" id="" value="Sign up"></div>
+        }
+    </div>
+</div>
