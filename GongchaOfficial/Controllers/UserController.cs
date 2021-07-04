@@ -1,8 +1,7 @@
-﻿using GongchaOfficial.Models;
+﻿using BookStoreEntity.Models;
+using GongchaOfficial.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GongchaOfficial.Controllers
@@ -21,7 +20,6 @@ namespace GongchaOfficial.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Register(FormCollection frm, Customer cs)
         {
@@ -76,5 +74,48 @@ namespace GongchaOfficial.Controllers
 
             return this.Register();
         }
+
+
+        [HttpGet]
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SignIn(FormCollection frm)
+        {
+            var phonenumber = frm["phonenumber"];
+            var password = frm["password"];
+            if (String.IsNullOrEmpty(phonenumber))
+            {
+                ViewData["ErrorPhonenumber"] = "Phone number can't be empty!";
+            }
+            else if (String.IsNullOrEmpty(password))
+            {
+                ViewData["ErrorPassword"] = "Password can't be empty!";
+            }
+            else
+            {
+                Customer cs = db.Customers.SingleOrDefault(p => p.CustomerPhoneNumer == phonenumber && p.CustomerPassword == password);
+                if (cs != null)
+                {                    
+                    Session["CustomerName"] = cs.CustomerName.ToString();
+                    return RedirectToAction("Index","Home");
+                }
+            }
+
+            return View();
+        }
+        
+        public ActionResult SignOut()
+        {
+            Session.Clear();
+            return RedirectToAction("Index","Home");
+        }
+
+
+
+
+      
     }
 }

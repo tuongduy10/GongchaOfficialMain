@@ -356,7 +356,9 @@ namespace BookStoreEntity.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                //return RedirectToAction("Index", "Manage");
+                Session["CostumerName"] = User.ToString();
+                return RedirectToAction("Index", "Home");
             }
 
             if (ModelState.IsValid)

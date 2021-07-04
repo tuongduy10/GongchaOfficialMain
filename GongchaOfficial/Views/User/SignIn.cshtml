@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="underslider">
+    <h2>Login</h2>
+</div>
+<div class="grid__row">
+    <div class="login_local">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <div class="login_title"><h3 style="font-weight: unset;">Use a local account to log in.</h3> <hr style="margin-top: 10px;"></div>
+            <div class="login_info"><label for="phonenumber"><h3>Phone number</h3></label><input type="text" name="phonenumber" id=""></div>
+            <div class="login_info"><label for="password"><h3>Password</h3></label><input type="password" name="password" id=""></div>
+            <div class="login_info">
+                <div><a href=""><i class="fas fa-user-plus"></i> @Html.ActionLink("Register as a new user", "Register", "User")</a></div>
+                <div><input name="rememberpassword" type="checkbox"><label for="rememberpassword"> Remember me?</label> </div>
+            </div>
+            <div class="login_info">
+                <div style="padding:20px 20px 20px 0"><a href="">@Html.ActionLink("Use another services to Sign In", "Login", "Account")</a></div>
+                <div class="signup-button"><input type="submit" value="Sign in"></div>
+            </div>
+        }
+    </div>
+</div>
+

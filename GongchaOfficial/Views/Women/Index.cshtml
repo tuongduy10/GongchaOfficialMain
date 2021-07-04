@@ -33,7 +33,7 @@
                     </div>
                     <div class="product-nameprice">
                         <li><a class="product-name" href="@Url.Action("ProductDetail","Detail", new {id = item.ProductId})" style="font-weight: bold;">@item.ProductName</a></li>
-                        <li><a class="product-price" href="@Url.Action("ProductDetail","Detail", new {id = item.ProductId})">@item.ProductPrice @*@String.Format("{0:0,0 VNĐ}",20000000)*@</a></li>
+                        <li><a class="product-price" href="@Url.Action("ProductDetail","Detail", new {id = item.ProductId})">@String.Format("{0:0,0 VNĐ}", item.ProductPrice)</a></li>
                     </div>
                 </div>
             </a>         

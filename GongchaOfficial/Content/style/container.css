@@ -382,6 +382,9 @@
 
 
 /* Login */
+.login_info a{
+    color:#333;
+}
 .login_local,
 .login_social {
     margin: 10px;
@@ -407,8 +410,9 @@
 
 /* Register */
 .signup-button {
-    margin-left: 50px;
+
 }
+
 .signup-button input {
     font-weight: 100;
     color: #333333;
@@ -418,6 +422,7 @@
     border: 1px solid #333;
     background-color: white;
 }
+
 .signup-button input:hover {
     border: 1px solid #b81f32;
     color: #b81f32;
