@@ -1,0 +1,136 @@
+﻿@model GongchaOfficial.Models.CustomerAddress
+@{
+    ViewBag.Title = "CustomerAddress";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<!-- Address's Customer -->
+<div class="underslider">
+    <h2>Your address</h2>
+</div>
+<div class="grid__row">
+    <div class="login_local">
+
+        @using (Html.BeginForm())
+        {
+            <div class="login_title"><h3 style="font-weight: unset;"><i class="fas fa-map-marker-alt"></i>Delivery infomation</h3> <hr style="margin:10px 0;"></div>
+            <h2>Details</h2>
+
+            <div class="login_info">
+                <label for="province"><h3>Provinces</h3></label>
+                <select id="proSelect" name="calc_shipping_provinces" required="" style="width: 227px; height: 27px;" onchange="proChange();">
+                    <option value="">Choose your province</option>
+                </select>
+                <input type="text" id="proData" value="Data" name="province" hidden />
+                <script type="text/javascript">
+                    var pro = document.getElementById("proSelect");
+                    function proChange() {
+                        var strPro = pro.options[pro.selectedIndex].text;
+                        $("#proData").val(strPro);
+                    }
+                </script>
+            </div>@ViewData["ProvineError"]
+            <div class="login_info">
+                <label for="district"><h3>District</h3></label>
+                <select id="disSelect" name="calc_shipping_district" required="" style="width: 227px; height: 27px;" onchange="disChange();">
+                    <option value="">Choose your district</option>
+                </select>
+                <input type="text" id="disData" value="Data" name="district" hidden />
+                <script type="text/javascript">
+                    var dis = document.getElementById("disSelect");
+                    function disChange() {
+                        var strDis = dis.options[dis.selectedIndex].text;
+                        $("#disData").val(strDis);
+                    }
+                </script>
+            </div>@ViewData["DistrictError"]
+            <div class="login_info">
+                <label for="number"><h3>Number</h3></label><input type="text" name="number" id="" value="@Html.DisplayFor(model => model.AddressNumber)">
+            </div>@ViewData["NumberError"]
+            <div class="login_info">
+                <label for="street"><h3>Street</h3></label><input type="text" name="street" id="" value="@Html.DisplayFor(model => model.AddressStreet)">
+            </div>@ViewData["StreetError"]
+            <div class="login_info">
+                <label for="ward"><h3>Ward</h3></label><input type="text" name="ward" id="" value="@Html.DisplayFor(model => model.AddressWard)">
+            </div>@ViewData["WardError"]
+
+            <div class="signup-button"><input type="submit" name="" id="" value="Continue"></div>
+        }
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js"></script>
+<script>
+    if (address_2 = localStorage.getItem('address_2_saved')) {
+        $('select[name="calc_shipping_district"] option').each(function () {
+            if ($(this).text() == address_2) {
+                $(this).attr('selected', '')
+            }
+        })
+        $('input.billing_address_2').attr('value', address_2)
+    }
+    if (district = localStorage.getItem('district')) {
+        $('select[name="calc_shipping_district"]').html(district)
+        $('select[name="calc_shipping_district"]').on('change', function () {
+            var target = $(this).children('option:selected').text()
+            target.attr('selected', '')
+
+            $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+            address_2 = target.text()
+            $('input.billing_address_2').attr('value', address_2)
+            district = $('select[name="calc_shipping_district"]').html()
+            localStorage.setItem('district', district)
+            localStorage.setItem('address_2_saved', address_2)
+        })
+    }
+    $('select[name="calc_shipping_provinces"]').each(function () {
+        var $this = $(this),
+            stc = ''
+        c.forEach(function (i, e) {
+            e += +1
+            stc += '<option value=' + e + '>' + i + '</option>'
+            $this.html('<option value="">Provinces/Cities</option>' + stc)
+            if (address_1 = localStorage.getItem('address_1_saved')) {
+                $('select[name="calc_shipping_provinces"] option').each(function () {
+                    if ($(this).text() == address_1) {
+                        $(this).attr('selected', '')
+                    }
+                })
+                $('input.billing_address_1').attr('value', address_1)
+            }
+            $this.on('change', function (i) {
+                i = $this.children('option:selected').index() - 1
+                var str = '',
+                    r = $this.val()
+                if (r != '') {
+                    arr[i].forEach(function (el) {
+                        str += '<option value="' + el + '">' + el + '</option>'
+                        $('select[name="calc_shipping_district"]').html('<option value="">Districts</option>' + str)
+                    })
+
+                    var address_1 = $this.children('option:selected').text()
+                    var district = $('select[name="calc_shipping_district"]').html()
+                    localStorage.setItem('address_1_saved', address_1)
+                    localStorage.setItem('district', district)
+                    $('select[name="calc_shipping_district"]').on('change', function () {
+                        var target = $(this).children('option:selected')
+                        target.attr('selected', '')
+                        $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                        var address_2 = target.text()
+                        $('input.billing_address_2').attr('value', address_2)
+                        district = $('select[name="calc_shipping_district"]').html()
+                        localStorage.setItem('district', district)
+                        localStorage.setItem('address_2_saved', address_2)
+                    })
+                } else {
+                    $('select[name="calc_shipping_district"]').html('<option value="">Districts</option>')
+                    district = $('select[name="calc_shipping_district"]').html()
+                    localStorage.setItem('district', district)
+                    localStorage.removeItem('address_1_saved', address_1)
+                }
+            })
+        })
+    })
+</script>

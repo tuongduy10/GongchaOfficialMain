@@ -1,0 +1,107 @@
+﻿@using GongchaOfficial.Models;
+@model List<dataCart>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<!-- CART -->
+<div class="underslider">
+</div>
+<div class="grid__row">
+    <!-- Cart List -->
+    <div class="grid__row-4">
+        <h1>YOUR CART</h1>
+        <hr>
+
+
+        @foreach (var item in Model)
+        {
+            using (Html.BeginForm("UpdateFromCart", "Cart", new { @ProductId = item.ProductId }))
+            {
+                <div class="products_incart">
+                    <div class="product_incart-imgwraper">
+                        <div class="product_incart-img"><img src="~/Content/style/img/@item.ProductImg" alt="missing"></div>
+                    </div>
+                    <div class="product_incart-nameprice">
+                        <a href=""><h1>@item.ProductName</h1></a>
+                        <h3>Price: @string.Format("{0:0,0 VNĐ}", item.ProductPrice)</h3>
+                    </div>
+                    <div class="product_incart-size">
+                        <h3>Size:</h3>&ensp;
+                        <select name="txtSize" id="">
+                            <option value="">36</option>
+                            <option value="">37</option>
+                            <option value="">38</option>
+                            <option value="">39</option>
+                            <option value="">40</option>
+                            <option value="">41</option>
+                            <option value="">42</option>
+                            <option value="">43</option>
+                            <option value="">44</option>
+                        </select>
+                    </div>
+                    <div class="product_incart-amount">
+                        <h3>Amount:</h3>&ensp;
+                        <input name="txtAmount" type="number" min="1" style="width: 30px;" value="@item.Amount">
+                    </div>
+                    <div class="product_incart-control">
+                        <h2>@String.Format("{0:0,0 VNĐ}", item.ProductPrice * item.Amount)</h2>
+
+                        <button class="cart-update" type="submit"><i class="fas fa-redo-alt"></i></button>
+                        <a class="cart-delete" href="@Url.Action("RemoveFromCart","Cart", new { @ProductId = item.ProductId})"><i class="far fa-trash-alt"></i></a>
+                    </div>
+                </div>
+                <hr>
+            }
+        }
+
+
+        <div style="text-align: right">
+            <h2 style="color: #333; margin-top: 20px;">Total price:</h2>
+            <h1 style="color: #b81f32;">@String.Format("{0:0,0 VNĐ}", ViewBag.TotalPrice)</h1>
+        </div>
+
+    </div>
+    <!-- Order Summary -->
+    <div class="grid__row-2">
+        <div class="row-2">
+            <div class="cart-title"><h1>Order Summary</h1></div>
+            <hr>
+            <div class="cart-info">
+                <div class="cart-info-item"><h3>Item:</h3><h3>@ViewBag.TotalAmount</h3></div>
+            </div>
+            <div class="cart-info">
+                <div class="cart-info-item">
+                    <h3>Coupon: </h3>
+                    <input type="text" style="width: 140px;">
+                    <input style="background-color: unset;" type="button" value="Submit">
+                </div>
+            </div>
+            <div class="cart-info">
+                <div class="cart-info-item"><h3>Discount:</h3><h3>0$</h3></div>
+            </div>
+            <div class="cart-info">
+                <div class="cart-info-item"><h3>Total:</h3><h3 style="color: #b81f32;">@String.Format("{0:0,0 VNĐ}", ViewBag.TotalPrice)</h3></div>
+            </div>
+            <hr>
+        </div>
+
+        <a href="" type="submit">
+            <div class="cart-button">
+                @if (Session["PhoneNumber"] != null || Request.IsAuthenticated)
+                {
+                    <h3>@Html.ActionLink("Continue", "CustomerAddress", "Cart") <i class="fas fa-arrow-right"></i></h3>
+                }
+                else
+                {
+                    <h3>@Html.ActionLink("Sign In", "SignIn", "User") <i class="fas fa-arrow-right"></i></h3>
+                }
+            </div>
+        </a>
+
+
+    </div>
+
+</div>
+

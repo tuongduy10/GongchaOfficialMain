@@ -11,13 +11,20 @@
             @Html.ValidationSummary(true)
             <h2>Details</h2>
             <div class="login_info"><label for="fullname"><h3>Full Name</h3></label><input type="text" name="fullname" id=""></div>@ViewData["ErrorName"]
-            <div class="login_info"><label for="dateofbirth"><h3>Date of Birth</h3></label><input type="date" name="dateofbirth" id=""></div>@ViewData["ErrorDate"]
-            <div class="login_info"><label for="sex"><h3>Sex</h3></label><input type="text" name="sex" id=""></div>@ViewData["ErrorSex"]
+            <div class="login_info"><label for="dateofbirth"><h3>Date of Birth</h3></label><input type="date" name="dateofbirth" id=""style="width:222px;height:27px;"></div>@ViewData["ErrorDate"]
+            <div class="login_info">
+                <label for="sex"><h3>Gender</h3></label>              
+                <div style="width:227px;height:27px;justify-content:space-between; display:flex;">
+                    @Html.RadioButton("Gender", "men") Male
+                    @Html.RadioButton("Gender", "women") Female
+                    @Html.RadioButton("Gender", "other") Orther
+                </div>
+            </div>@ViewData["ErrorGender"]
             <div class="login_info"><label for="mail"><h3>Email</h3></label><input type="text" name="mail" id=""></div>@ViewData["ErrorMail"]
 
             <h2>Login Details</h2>
-            <div class="login_info"><label for="phonenumber"><h3>Phone Number</h3></label><input type="text" name="phonenumber" id=""></div>@ViewData["Error"]
-            <div class="login_info"><label for="password"><h3>Password</h3></label><input type="password" name="password" id=""></div>@ViewData["Error"]
+            <div class="login_info"><label for="phonenumber"><h3><i class="fas fa-phone"></i> Phone Number</h3></label><input type="text" name="phonenumber" id=""></div>@ViewData["Error"]
+            <div class="login_info"><label for="password"><h3><i class="fas fa-lock"></i> Password</h3></label><input type="password" name="password" id=""></div>@ViewData["Error"]
             <div class="signup-button"><input type="submit" name="" id="" value="Sign up"></div>
         }
     </div>

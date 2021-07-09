@@ -21,11 +21,11 @@ namespace GongchaOfficial.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(FormCollection frm, Customer cs)
+        public ActionResult Register(FormCollection frm, Customer cs,CustomerAddress ca)
         {
             var name = frm["fullname"];
             var dateofbirth = String.Format("{0:MM/dd/yyy}", frm["dateofbirth"]);
-            var sex = frm["sex"];
+            var sex = frm["Gender"].ToString();
             var mail = frm["mail"];
 
             var phonenumber = frm["phonenumber"];
@@ -42,7 +42,7 @@ namespace GongchaOfficial.Controllers
             }
             else if (String.IsNullOrEmpty(sex))
             {
-                
+                ViewData["ErrorGender"] = "Please check your gender!";
             }
             else if (String.IsNullOrEmpty(mail))
             {
@@ -50,7 +50,7 @@ namespace GongchaOfficial.Controllers
             }
             else if (String.IsNullOrEmpty(phonenumber))
             {
-                ViewData["ErrorPhone"] = "Phone number can't be empty!"; 
+                ViewData["ErrorPhone"] = "Phone number can't be empty!";
             }
             else if (String.IsNullOrEmpty(password))
             {
@@ -60,15 +60,17 @@ namespace GongchaOfficial.Controllers
             {
                 cs.CustomerName = name;
                 cs.CustomerDateOfBirth = DateTime.Parse(dateofbirth);
-                //cs.CustomerSex = sex;
+                cs.CustomerSex = sex;
                 cs.CustomerMail = mail;
                 cs.CustomerPhoneNumer = phonenumber;
+                ca.CustomerPhoneNumer = phonenumber;
                 cs.CustomerPassword = password;
 
                 db.Customers.InsertOnSubmit(cs);
+                db.CustomerAddresses.InsertOnSubmit(ca);
                 db.SubmitChanges();
 
-                return RedirectToAction("Login");
+                return RedirectToAction("SignIn");
             }
 
 
@@ -100,6 +102,7 @@ namespace GongchaOfficial.Controllers
                 if (cs != null)
                 {                    
                     Session["CustomerName"] = cs.CustomerName.ToString();
+                    Session["PhoneNumber"] = cs.CustomerPhoneNumer.ToString();
                     return RedirectToAction("Index","Home");
                 }
             }

@@ -5,9 +5,9 @@
     {
         @Html.AntiForgeryToken()
         <li class="header__navbar-item-right"><a href=""><i class="far fa-heart"></i></a></li>
-        <li class="header__navbar-item-right"><a href=""><i class="fas fa-shopping-bag"></i></a></li>
-        <li class="header__navbar-item-right"><a href="">@Html.ActionLink("Hello " + User.Identity.GetUserName() + " !", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</a></li>
-        <li class="header__navbar-item-right"><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fas fa-sign-out-alt"></i>Sign Out</a></li>
+        <li class="header__navbar-item-right">@Html.Action("CartPartial", "Cart")</li>
+        <li class="header__navbar-item-right`"><a href="">@Html.ActionLink("Hello " + User.Identity.GetUserName() + " !", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</a></li>
+        <li class="header__navbar-item-right"><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
     }
 }
 else
@@ -15,15 +15,15 @@ else
     if (Session["CustomerName"] == null)
     {
         <li class="header__navbar-item-right"><a href=""><i class="far fa-heart"></i></a></li>
-        <li class="header__navbar-item-right"><a href=""><i class="fas fa-shopping-bag"></i></a></li>
+        <li class="header__navbar-item-right">@Html.Action("CartPartial", "Cart")</li>
         <li class="header__navbar-item-right"><a href=""><i class="fas fa-sign-in-alt"></i> @Html.ActionLink("Sign in", "SignIn", "User")</a></li>
-        <li class="header__navbar-item-right"><a href=""><i class="fas fa-user-plus"></i>@Html.ActionLink("Sign up", "Register", "User")</a></li>
+        <li class="header__navbar-item-right"><a href=""><i class="fas fa-user-plus"></i> @Html.ActionLink("Sign up", "Register", "User")</a></li>
     }
     else
     {
         <li class="header__navbar-item-right"><a href=""><i class="far fa-heart"></i></a></li>
-        <li class="header__navbar-item-right"><a href=""><i class="fas fa-shopping-bag"></i></a></li>
+        <li class="header__navbar-item-right">@Html.Action("CartPartial","Cart")</li>
         <li class="header__navbar-item-right">Hello @Session["CustomerName"]</li>
-        <li class="header__navbar-item-right"><a href=""><i class="fas fa-sign-out-alt"></i>@Html.ActionLink("Sign out", "SignOut", "User")</a></li>
+        <li class="header__navbar-item-right"><a href=""><i class="fas fa-sign-out-alt"></i> @Html.ActionLink("Sign out", "SignOut", "User")</a></li>
     }
 }

@@ -1,0 +1,21 @@
+﻿@using GongchaOfficial.Models
+@model List<dataCart>
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@foreach (var item in Model)
+{
+<ul>
+    <li>
+        @item.ProductName
+    </li>
+    <li>
+        @item.ProductPrice
+    </li>
+    <li>
+        @item.Amount
+    </li>
+</ul>
+}

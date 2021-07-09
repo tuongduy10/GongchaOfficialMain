@@ -207,11 +207,11 @@
     width: 100%;
 }
 
-    .itemimg img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+.itemimg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .detail-listimg {
     height: 100px;
@@ -222,9 +222,9 @@
     background-color: rgb(218, 218, 218);
 }
 
-    .detail-listimg .itemimg {
-        width: 110px;
-    }
+.detail-listimg .itemimg {
+    width: 110px;
+}
 
 .detail-content {
     height: 450px;
@@ -320,11 +320,9 @@
 .black {
     background-color: black;
 }
-
 .red {
     background-color: red;
 }
-
 .purple {
     background-color: purple;
 }
@@ -428,6 +426,137 @@
     color: #b81f32;
     margin-left: 4px;
 }
+
+/* Cart */
+.grid__row-4 {
+    width: 920px;
+    min-height: 200px;
+    margin: 0 10px;
+}
+.grid__row-2 {
+    width: 460px;
+    min-height: 200px;
+    margin: 0 10px;
+    background-color: #ddd;
+}
+
+/*Product in Cart*/
+.products_incart {
+    margin: 10px 0;
+    display: flex;
+    width: 920px;
+    justify-content: space-between;
+}
+.product_incart-imgwraper {
+    height: 150px;
+    width: 200px;
+}
+.product_incart-img {
+    height: 100%;
+    width: 100%;
+}
+.product_incart-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.product_incart-nameprice {
+    width: 200px;
+}
+.product_incart-nameprice,
+.product_incart-nameprice a {
+    color: #333;
+}
+
+.product_incart-size,
+.product_incart-amount {
+    display: flex;
+    height: 25px;
+}
+
+.product_incart-control h2 {
+    color: #b81f32;
+}
+.product_incart-control {
+    width:180px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.cart-update,
+.cart-delete {
+    text-align: center;
+    padding: 20px 30px;
+    border: 1px solid #333;
+}
+
+.cart-update {
+    background-color: unset;
+}
+
+.cart-update:hover,
+.cart-delete:hover {
+    border: 1px solid #b81f32;
+}
+
+.cart-update:hover i,
+.cart-delete:hover i {
+    color: #b81f32;
+}
+
+/*Order Summary*/
+.grid__row-2 {
+    color: #333;
+}
+.cart-button,
+.row-2 {
+    width: 300px;
+    margin: auto;
+}
+.cart-title {
+    text-align: center;
+}
+.cart-info {
+    padding: 10px 0;
+}
+.cart-info-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-button {
+    height: 50px;
+    width: 300px;
+    line-height: 50px;
+    margin: 10px auto;
+    text-align: center;
+    color: #333;
+    border: 1px solid #333;
+}
+.cart-button h3 a {
+    color: #333;
+}
+
+.cart-button:hover,
+.cart-button:hover i,
+.cart-button:hover a {
+    color: #b81f32;
+}
+
+.cart-button:hover {
+    border: 1px solid #b81f32;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 /****** Style Star Rating Widget *****/

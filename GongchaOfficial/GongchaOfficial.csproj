@@ -296,15 +296,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DetailController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WomenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\dataCart.cs" />
+    <Compile Include="Models\dbGongcha.cs">
+      <DependentUpon>dbGongcha.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\dbGongcha.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -361,6 +367,13 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\SignIn.cshtml" />
+    <Content Include="Views\Women\ProductDetail.cshtml" />
+    <Content Include="Views\Services\Location.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
+    <Content Include="Views\Order\CustomerAddress.cshtml" />
+    <Content Include="Views\Cart\CustomerAddress.cshtml" />
+    <Content Include="Views\Cart\Order.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -408,7 +421,6 @@
     <Content Include="Views\Women\Index.cshtml" />
     <Content Include="Views\Women\Category.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
-    <Content Include="Views\Detail\ProductDetail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />

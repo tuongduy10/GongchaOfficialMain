@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ProductDetail";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
@@ -25,7 +24,7 @@
         <div class="detail-content">
             <div class="content-left">
                 <div class="content-name"><h1>@Model.ProductName</h1></div>
-                <div class="content-price"><h2>@Model.ProductPrice</h2></div>
+                <div class="content-price"><h2>@String.Format("{0:0,0 VNĐ}", Model.ProductPrice)</h2></div>
                 <div class="content-description">
                     <h2>Description:</h2>
                     <p>The Jordan Jumpman Diamond Shorts are inspired by a classic pro kit worn by Michael Jordan. Remade for easy, everyday wear, they're made from lightweight fabric with taped overlays and premium Jumpman graphics.</p>
@@ -96,7 +95,7 @@
                 </div>
                 <div class="content-add">
                     <div class="add-to-bag">
-                        <a href=""><strong>Add to bag</strong></a>
+                        <a href="@Url.Action("AddToCart", "Cart", new { @ProductId = @Model.ProductId, @url = Request.Url.ToString()})"><strong>Add to cart</strong></a>
                     </div>
                     <div class="add-to-fav">
                         <a href=""><i class="far fa-heart"></i></a>
