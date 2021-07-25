@@ -398,17 +398,18 @@
 .login_info input {
     font-size: 18px
 }
-.login_local h2{
+.login_local h2,
+.registerasnewuser:hover i,
+.registerasnewuser:hover a{
     color: #b81f32;
 }
 
-
-
-
-
 /* Register */
-.signup-button {
-
+.signup-service {
+    text-decoration: underline;
+}
+.signup-service:hover{
+    color: #b81f32;
 }
 
 .signup-button input {
@@ -514,6 +515,7 @@
     margin: auto;
 }
 .cart-title {
+    margin-top: 10px;
     text-align: center;
 }
 .cart-info {
@@ -523,7 +525,9 @@
     display: flex;
     justify-content: space-between;
 }
-
+.cart-method {
+    margin-top: 10px;
+}
 .cart-button {
     height: 50px;
     width: 300px;

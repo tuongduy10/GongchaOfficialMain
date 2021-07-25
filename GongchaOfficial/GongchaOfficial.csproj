@@ -179,6 +179,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -296,7 +302,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ComingSoonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -326,11 +334,36 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\LG\.gitignore" />
+    <Content Include="Content\LG\assets\css\login.css" />
+    <Content Include="Content\LG\assets\images\login.jpg" />
+    <Content Include="Content\LG\assets\images\logo.svg" />
+    <Content Include="Content\LG\gulpfile.js" />
+    <Content Include="Content\LG\index.html" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\src\main.js" />
     <Content Include="Content\style\base.css" />
     <Content Include="Content\style\container.css" />
     <Content Include="Content\style\footer.css" />
+    <Content Include="Content\style\gioithieu.css" />
     <Content Include="Content\style\header.css" />
+    <Content Include="Content\style\images\mainlevel-bg.png" />
+    <Content Include="Content\style\images\module-bg.jpg" />
+    <Content Include="Content\style\images\module-bg1.jpg" />
+    <Content Include="Content\style\images\s1.jpg" />
+    <Content Include="Content\style\images\s11.jpg" />
+    <Content Include="Content\style\images\s12.gif" />
+    <Content Include="Content\style\images\s2.jpg" />
+    <Content Include="Content\style\images\s22.jpg" />
+    <Content Include="Content\style\images\s3.jpg" />
+    <Content Include="Content\style\images\s4.jpg" />
+    <Content Include="Content\style\images\s7.jpg" />
+    <Content Include="Content\style\images\s8.jpg" />
+    <Content Include="Content\style\images\s9.jpg" />
+    <Content Include="Content\style\images\sp1.jpg" />
+    <Content Include="Content\style\images\sp4.jpg" />
+    <Content Include="Content\style\img\1200px-Heart_corazón.svg.png" />
+    <Content Include="Content\style\img\desk.jpg" />
     <Content Include="Content\style\img\giay1.jpg" />
     <Content Include="Content\style\img\giay2.jpg" />
     <Content Include="Content\style\img\giay3.jpg" />
@@ -351,6 +384,9 @@
     <Content Include="Content\style\img\tui1.1.jpg" />
     <Content Include="Content\style\img\tui1.2.jpg" />
     <Content Include="Content\style\img\tui1.jpg" />
+    <Content Include="Content\style\img_commingsoon\banner.jpg" />
+    <Content Include="Content\style\img_commingsoon\banner1.png" />
+    <Content Include="Content\style\img_commingsoon\banner2.jpg" />
     <Content Include="Content\style\vid\productvid1.mp4" />
     <Content Include="Content\style\vid\productvid2.mp4" />
     <Content Include="favicon.ico" />
@@ -364,6 +400,10 @@
       <LastGenOutput>dbGongcha.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\LG\assets\css\login.css.map" />
+    <Content Include="Content\LG\assets\scss\login.scss" />
+    <Content Include="Content\LG\package-lock.json" />
+    <Content Include="Content\LG\package.json" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\SignIn.cshtml" />
@@ -371,9 +411,25 @@
     <Content Include="Views\Services\Location.cshtml" />
     <Content Include="Views\Cart\Cart.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
-    <Content Include="Views\Order\CustomerAddress.cshtml" />
     <Content Include="Views\Cart\CustomerAddress.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Product.cshtml" />
+    <Content Include="Views\Admin\CategoryIndex.cshtml" />
+    <Content Include="Views\Admin\DetailCategory.cshtml" />
+    <Content Include="Views\Admin\DeleteCategory.cshtml" />
+    <Content Include="Views\Admin\CreateCategory.cshtml" />
+    <Content Include="Views\Admin\EditCategory.cshtml" />
+    <Content Include="Views\Admin\AddSize.cshtml" />
+    <Content Include="Views\Shared\_LoginAdminPartial.cshtml" />
+    <Content Include="Views\ComingSoon\Index.cshtml" />
+    <Content Include="Views\Services\GioiThieu.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

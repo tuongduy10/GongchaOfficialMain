@@ -1,0 +1,19 @@
+﻿@if (Session["AdminAccount"] != null)
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                @Session["AdminAccount"]
+                <span class="caret "></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="@Url.Action("","")">Edit Profile</a></li>
+                <li><a href="@Url.Action("","")">Add new Admin</a></li>
+                <li><a href="@Url.Action("","")">Setting</a></li>
+                <li role="separator" class="divider "> </li>
+                <li><a href="@Url.Action("LogOff","Admin")">Log off</a></li>
+            </ul>
+        </li>
+    </ul>
+}
+

@@ -17,5 +17,9 @@ namespace GongchaOfficial.Controllers
         {
             return View();
         }
+        public ActionResult GioiThieu()
+        {
+            return View();
+        }
     }
 }

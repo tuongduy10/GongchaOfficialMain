@@ -14,11 +14,11 @@ namespace GongchaOfficial.Controllers
         // GET: Women
         private List<Product> getNewProDuctWithSex(int count)
         {
-            return data.Products.Where(s => s.SexId == "women" || s.SexId == "unisex").OrderByDescending(a => a.ProductReleaseDate).Take(count).ToList();
+            return data.Products.Where(s => (s.SexId == "women" || s.SexId == "unisex") && s.ProductStatus == "open").OrderByDescending(a => a.ProductReleaseDate).Take(count).ToList();
         }
         private List<Product> getProductWithId(String id)
         {
-            return data.Products.Where(s => s.CategoryId == id).ToList();
+            return data.Products.Where(s => s.CategoryId == id && s.ProductStatus == "open").ToList();
         } 
         public ActionResult Index(String id)
         {
@@ -46,6 +46,9 @@ namespace GongchaOfficial.Controllers
             var product = from pd in data.Products
                           where pd.ProductId == id
                           select pd;
+
+            List<Size> listSize = data.Sizes.ToList();
+            ViewBag.Size = listSize;
 
             return View(product.Single());
         }

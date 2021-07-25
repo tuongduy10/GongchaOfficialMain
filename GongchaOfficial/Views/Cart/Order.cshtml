@@ -5,17 +5,93 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-@foreach (var item in Model)
-{
-<ul>
-    <li>
-        @item.ProductName
-    </li>
-    <li>
-        @item.ProductPrice
-    </li>
-    <li>
-        @item.Amount
-    </li>
-</ul>
-}
+<!-- Order -->
+<div class="underslider">
+</div>
+<div class="grid__row">
+    <!-- Cart List -->
+    <div class="grid__row-4">
+        <h2>Order Confirmation</h2>
+        <hr>
+        @foreach (var item in Model)
+        {
+            <div class="products_incart">
+                <div class="product_incart-imgwraper">
+                    <div class="product_incart-img"><img src="~/Content/style/img/@item.ProductImg" alt="missing"></div>
+                </div>
+                <div class="product_incart-nameprice">
+                    <a href=""><h1>@item.ProductName</h1></a>
+                    <h3 style="font-weight: unset;">Price: @string.Format("{0:0,0 VNĐ}", item.ProductPrice)</h3>
+                </div>
+                <div class="product_incart-size">
+                    <h3 style="font-weight: unset;">Size: @item.ProductSize</h3>&ensp;
+                </div>
+                <div class="product_incart-amount">
+                    <h3 style="font-weight: unset;">x @item.Amount</h3>&ensp;
+                </div>
+                <div class="product_incart-control">
+                    <h2 style="font-weight: unset;">@String.Format("{0:0,0 VNĐ}", item.TotalPrice)</h2>
+                </div>
+            </div>
+            <hr>
+        }
+        <div style="text-align: right">
+            <h2 style="color: #333; margin-top: 20px;">Total price:</h2>
+            <h2 style="color: #b81f32; font-weight: unset;">@String.Format("{0:0,0 VNĐ}", ViewBag.TotalPrice)</h2>
+        </div>
+        <div class="login_title">
+            <h3 style="font-weight: unset; margin-top: 10px; display: flex;">
+                <h2>Delivery Information:</h2>
+                <div style="margin-left: 50px; margin-top: 10px;"><i class="fas fa-map-marker-alt"></i> @ViewBag.Address</div>
+            </h3>
+        </div>
+
+    </div>
+    <!-- Order Summary -->
+    <div class="grid__row-2">
+        <div class="row-2">
+            <div class="cart-title"><h2>Order Summary</h2></div>
+            <hr>
+
+            <div class="cart-info">
+                <div class="cart-info-item"><h3>Item:</h3><h3 style="font-weight: unset;">1</h3></div>
+            </div>
+            <div class="cart-info">
+                <div class="cart-info-item">
+                    <h3>Coupon: </h3>
+                    <input type="text" style="width: 140px;">
+                    <input style="background-color: unset;" type="button" value="Submit">
+                </div>
+            </div>
+            <div class="cart-info">
+                <div class="cart-info-item"><h3>Discount:</h3><h3 style="font-weight: unset;">0$</h3></div>
+            </div>
+            <div class="cart-info">
+                <div class="cart-info-item"><h3>Delivery:</h3><h3 style="font-weight: unset;">0$</h3></div>
+            </div>
+            <div class="cart-info">
+                <div class="cart-info-item">
+                    <h3>Total:</h3><h3 style="color: #b81f32;">@String.Format("{0:0,0 VNĐ}", ViewBag.TotalPrice)</h3>
+                </div>
+            </div>
+
+            <div class="cart-title"><h2>Payment Methods</h2></div>
+            <hr>
+            <div class="cart-method">
+                <input type="radio" name="payment"> <label for="payment"> Momo</label> <br>
+                <input type="radio" name="payment"> <label for="payment"> Visa</label> <br>
+                <input type="radio" name="payment"> <label for="payment"> Cash on delivery</label> <br>
+            </div>
+
+
+        </div>
+
+        <a href="@Url.Action("SaveOrder","Cart")" type="submit">
+            <div class="cart-button">
+                <h3>Order</h3>
+            </div>
+        </a>
+
+
+    </div>
+</div>

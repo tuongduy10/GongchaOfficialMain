@@ -1,0 +1,67 @@
+﻿@model IEnumerable<GongchaOfficial.Models.Category>
+
+@{
+    ViewBag.Title = "CategoryIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CategoryIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateCategory")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Sex
+        </th>
+        <th>
+            Collection
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        @if (item.CategoryStatus == "open")
+        {
+            <td style="color:#00FF00">
+                @Html.DisplayFor(modelItem => item.CategoryStatus)
+            </td>
+        }
+        else if (item.CategoryStatus == "close")
+        {
+            <td style="color:red">
+                @Html.DisplayFor(modelItem => item.CategoryStatus)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryStatus)
+            </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Sex.Sex1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollectionId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditCategory", new { id = item.CategoryId }) |
+            @Html.ActionLink("Details", "DetailCategory", new { id = item.CategoryId }) |
+            @Html.ActionLink("Delete", "DeleteCategory", new { id = item.CategoryId })
+        </td>
+    </tr>
+}
+
+</table>

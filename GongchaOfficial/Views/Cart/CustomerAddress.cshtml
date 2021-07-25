@@ -13,15 +13,14 @@
 
         @using (Html.BeginForm())
         {
-            <div class="login_title"><h3 style="font-weight: unset;"><i class="fas fa-map-marker-alt"></i>Delivery infomation</h3> <hr style="margin:10px 0;"></div>
+            <div class="login_title"><h3 style="font-weight: unset;"><i class="fas fa-map-marker-alt"></i>&ensp;infomation</h3> <hr style="margin:10px 0;"></div>
             <h2>Details</h2>
-
             <div class="login_info">
                 <label for="province"><h3>Provinces</h3></label>
                 <select id="proSelect" name="calc_shipping_provinces" required="" style="width: 227px; height: 27px;" onchange="proChange();">
                     <option value="">Choose your province</option>
                 </select>
-                <input type="text" id="proData" value="Data" name="province" hidden />
+                <input type="text" id="proData" value="@Model.AddressProvince" name="province" hidden />
                 <script type="text/javascript">
                     var pro = document.getElementById("proSelect");
                     function proChange() {
@@ -35,7 +34,7 @@
                 <select id="disSelect" name="calc_shipping_district" required="" style="width: 227px; height: 27px;" onchange="disChange();">
                     <option value="">Choose your district</option>
                 </select>
-                <input type="text" id="disData" value="Data" name="district" hidden />
+                <input type="text" id="disData" value="@Model.AddressDistrict" name="district" hidden />
                 <script type="text/javascript">
                     var dis = document.getElementById("disSelect");
                     function disChange() {

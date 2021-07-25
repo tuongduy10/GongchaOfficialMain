@@ -1,0 +1,104 @@
+﻿@model GongchaOfficial.Models.Product
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>CHI TIẾT SẢN PHẨM</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên sản phẩm:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            Giá bán:
+        </dt>
+
+        <dd>
+            @String.Format("{0:0,0}", Model.ProductPrice) VNĐ
+        </dd>
+
+        <dt>
+            Kích cỡ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductSize)
+        </dd>
+
+        <dt>
+            Ảnh:
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("~/Content/style/img/"+ Model.ProductImage)" width="120px" />
+        </dd>
+
+        <dt>
+            Ngày cập nhật:
+        </dt>
+
+        <dd>
+            @String.Format("{0:dd/MM/yyyy}", Model.ProductReleaseDate)
+        </dd>
+
+        <dt>
+            Tình trạng:
+        </dt>
+
+        @if (Model.ProductStatus == "open")
+        {
+            <dd style="color:#00FF00">
+                @Html.DisplayFor(model => model.ProductStatus)
+            </dd>
+        }
+        else if (Model.ProductStatus == "close")
+        {
+            <dd style="color:red">
+                @Html.DisplayFor(model => model.ProductStatus)
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.ProductStatus)
+            </dd>
+        }
+
+        <dt>
+            Danh mục:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryId)
+        </dd>
+
+        <dt>
+            Giới tính:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SexId)
+        </dd>
+
+        <dt>
+            Bộ sưu tập:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Product")
+</p>

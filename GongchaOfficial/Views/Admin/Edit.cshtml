@@ -1,0 +1,129 @@
+﻿@model GongchaOfficial.Models.Product
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()  
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductId)
+
+        <div class="form-group">
+            @Html.Label("ID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div style="font:18px; padding: 5px 0 0 5px"> @ViewBag.ProductId </div>
+            </div>
+        </div>
+   
+        <div class="form-group">
+            @Html.Label("Tên", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="fileUpload" accept="image/*" id="imgInp" /><br />
+                <img src="@Url.Content("~/Content/style/img/" + Model.ProductImage)" alt="Alternate Text" style="width: 200px" /><br />
+                
+                Hình mới sẽ thay đổi khi cập nhật <br />
+                <img name="txtHinh" id="blah" src="" alt="Alternate Text" style="width:200px" /><br />
+
+                @ViewBag.Thongbao
+                <script>
+                    imgInp.onchange = evt => {
+                        const [file] = imgInp.files
+                        if (file) {
+                            blah.src = URL.createObjectURL(file)
+                        }
+                    }
+                </script>
+                @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Giá", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ngày ra mắt", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("txtReleaseDate",Model.ProductReleaseDate.Value, "{0:yyyy-MM-dd}", new { @style = "width:100%", type = "date", @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.ProductReleaseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Trạng thái", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div style="width:100px;height:27px;justify-content:space-between; display:flex;">
+                    @if (Model.ProductStatus == "open")
+                    {
+                        <p>@Html.RadioButton("Status", "close") Close</p>
+                        <p>@Html.RadioButton("Status", "open", new { @checked = "checked" }) Open</p>
+                    }
+                    else if (Model.ProductStatus == "close")
+                    {
+                        <p>@Html.RadioButton("Status", "close", new { @checked = "checked" }) Close</p>
+                        <p>@Html.RadioButton("Status", "open") Open</p>
+                    }
+                    else
+                    {
+                        <p>@Html.RadioButton("Status", "close") Close</p>
+                        <p>@Html.RadioButton("Status", "open") Open</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Loại", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Giới tính", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SexId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SexId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Bộ sưu tập", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CollectionId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CollectionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Product")
+</div>

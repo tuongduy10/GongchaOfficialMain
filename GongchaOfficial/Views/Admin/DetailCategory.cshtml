@@ -1,0 +1,77 @@
+﻿@model GongchaOfficial.Models.Category
+
+@{
+    ViewBag.Title = "DetailCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DetailCategory</h2>
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+        @if (Model.CategoryStatus == "open")
+        {
+            <dd style="color:#00FF00;">
+                @Html.DisplayFor(model => model.CategoryStatus)
+            </dd>
+        }
+        else if (Model.CategoryStatus == "close")
+        {
+            <dd style="color:red;">
+                @Html.DisplayFor(model => model.CategoryStatus)
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.CategoryStatus)
+            </dd>
+        }
+        <dt>
+            Sex
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sex.Sex1)
+        </dd>
+
+        <dt>
+            Collection
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionId)
+        </dd>
+
+        <dt>
+            Size
+        </dt>
+
+        <dd style="display:flex">
+            @foreach (var item in ViewBag.CategorySize)
+            {
+                <p>@item.SizeValue &ensp;</p> 
+            }
+            <a>@Html.ActionLink("Add Size","AddSize", new { id = Model.CategoryId })</a>  
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditCategory", new { id = Model.CategoryId }) |
+    @Html.ActionLink("Back to List", "CategoryIndex")
+</p>
+

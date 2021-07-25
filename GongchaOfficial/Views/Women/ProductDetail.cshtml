@@ -1,10 +1,11 @@
-﻿@{
+﻿@using GongchaOfficial.Models;
+@{
     ViewBag.Title = "ProductDetail";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <div class="underslider">
-    <h2>MAKE YOUR DAY!</h4>
+    <h2>MAKE YOUR DAY!</h2>
 </div>
 <!-- Phân loại -->
 <div class="grid__row">
@@ -73,29 +74,26 @@
                         <input id="red-radio" type="radio"><label class="red" for="red-radio"></label>
                         <input id="purple-radio" type="radio"><label class="purple" for="purple-radio"></label>
                     </div>
-
                 </div>
                 <div class="content-size">
-                    <h2>Size:</h2>
-                    <select name="" id="">
-                        <option value="">36</option>
-                        <option value="">37</option>
-                        <option value="">38</option>
-                        <option value="">39</option>
-                        <option value="">40</option>
-                        <option value="">41</option>
-                        <option value="">42</option>
-                        <option value="">43</option>
-                        <option value="">44</option>
-                    </select>
+                    <h2>Size avalible:</h2>
+                    <select id="selectKichCo" name="selectSize" >
+                        @foreach (var size in ViewBag.Size as List<Size>)
+                        {
+                            if (size.SizeId == Model.CategoryId)
+                            {
+                                <option value="@size.SizeValue">@size.SizeValue</option>
+                            }
+                        }
+                    </select>                   
                 </div>
                 <div class="content-amount">
-                    <h2>Amount:</h2>
-                    <input type="number" id="quantity" name="quantity" min="1" max="50">
+                    <h2>Status:</h2>
+                    <h2 style="color:green; font-weight: unset;">Open</h2>
                 </div>
                 <div class="content-add">
                     <div class="add-to-bag">
-                        <a href="@Url.Action("AddToCart", "Cart", new { @ProductId = @Model.ProductId, @url = Request.Url.ToString()})"><strong>Add to cart</strong></a>
+                        <a href="" onclick='sendData("@Model.ProductId","@Request.Url.ToString()")'>Add to cart</a>
                     </div>
                     <div class="add-to-fav">
                         <a href=""><i class="far fa-heart"></i></a>
@@ -115,5 +113,16 @@
             <div class="itemimg"><img src="~/Content/style/img/@Model.ProductImage" alt="Missing Image"></div>
         </div>
     </div>
-
 </div>
+
+<script>
+    function sendData(id, url) {
+        var size = document.querySelector('#selectKichCo').value
+
+        $.post("/Cart/AddToCart", { ProductId: id, size: size, url: url}, function (data, status) {
+            if (status == "success") {
+                window.location = url
+            }
+        });
+    }
+</script>

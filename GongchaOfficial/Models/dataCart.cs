@@ -14,6 +14,7 @@ namespace GongchaOfficial.Models
         public string ProductImg { get; set; }
         public double ProductPrice { get; set; }
         public string ProductSize { get; set; }
+        public string CategoryId { get; set; }
         public int Amount { get; set; }
         public double TotalPrice
         {
@@ -28,6 +29,7 @@ namespace GongchaOfficial.Models
             ProductImg = pd.ProductImage;
             ProductPrice = double.Parse(pd.ProductPrice.ToString());
             ProductSize = pd.ProductSize;
+            CategoryId = pd.CategoryId;
             Amount = 1;//Số lượng của sản phẩm mặc định trong giỏ hàng
         }
 

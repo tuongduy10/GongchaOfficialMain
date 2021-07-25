@@ -15,11 +15,11 @@
             <div class="login_info"><label for="phonenumber"><h3>Phone number</h3></label><input type="text" name="phonenumber" id=""></div>
             <div class="login_info"><label for="password"><h3>Password</h3></label><input type="password" name="password" id=""></div>
             <div class="login_info">
-                <div><a href=""><i class="fas fa-user-plus"></i> @Html.ActionLink("Register as a new user", "Register", "User")</a></div>
+                <div class="registerasnewuser"><a href="@Url.Action("Register", "User")"><i class="fas fa-user-plus"></i> Register as a new user</a></div>
                 <div><input name="rememberpassword" type="checkbox"><label for="rememberpassword"> Remember me?</label> </div>
             </div>
             <div class="login_info">
-                <div style="padding:20px 20px 20px 0"><a href="">@Html.ActionLink("Use another services to Sign In", "Login", "Account")</a></div>
+                <div style="padding:20px 20px 20px 0"><a class="signup-service" href="@Url.Action("Login", "Account")">Use another services to Sign In</a></div>
                 <div class="signup-button"><input type="submit" value="Sign in"></div>
             </div>
         }

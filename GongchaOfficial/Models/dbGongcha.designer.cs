@@ -57,6 +57,12 @@ namespace GongchaOfficial.Models
     partial void InsertSex(Sex instance);
     partial void UpdateSex(Sex instance);
     partial void DeleteSex(Sex instance);
+    partial void InsertSize(Size instance);
+    partial void UpdateSize(Size instance);
+    partial void DeleteSize(Size instance);
+    partial void InsertBillDeTail(BillDeTail instance);
+    partial void UpdateBillDeTail(BillDeTail instance);
+    partial void DeleteBillDeTail(BillDeTail instance);
     #endregion
 		
 		public dbGongchaDataContext() : 
@@ -102,14 +108,6 @@ namespace GongchaOfficial.Models
 			get
 			{
 				return this.GetTable<Bill>();
-			}
-		}
-		
-		public System.Data.Linq.Table<BillDetail> BillDetails
-		{
-			get
-			{
-				return this.GetTable<BillDetail>();
 			}
 		}
 		
@@ -166,6 +164,22 @@ namespace GongchaOfficial.Models
 			get
 			{
 				return this.GetTable<Sex>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Size> Sizes
+		{
+			get
+			{
+				return this.GetTable<Size>();
+			}
+		}
+		
+		public System.Data.Linq.Table<BillDeTail> BillDeTails
+		{
+			get
+			{
+				return this.GetTable<BillDeTail>();
 			}
 		}
 	}
@@ -324,6 +338,8 @@ namespace GongchaOfficial.Models
 		
 		private string _CustomerPhoneNumber;
 		
+		private EntitySet<BillDeTail> _BillDeTails;
+		
 		private EntityRef<Customer> _Customer;
 		
 		private EntityRef<CustomerAddress> _CustomerAddress;
@@ -352,6 +368,7 @@ namespace GongchaOfficial.Models
 		
 		public Bill()
 		{
+			this._BillDeTails = new EntitySet<BillDeTail>(new Action<BillDeTail>(this.attach_BillDeTails), new Action<BillDeTail>(this.detach_BillDeTails));
 			this._Customer = default(EntityRef<Customer>);
 			this._CustomerAddress = default(EntityRef<CustomerAddress>);
 			this._Discount = default(EntityRef<Discount>);
@@ -506,6 +523,19 @@ namespace GongchaOfficial.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Bill_BillDeTail", Storage="_BillDeTails", ThisKey="BillId", OtherKey="BillId")]
+		public EntitySet<BillDeTail> BillDeTails
+		{
+			get
+			{
+				return this._BillDeTails;
+			}
+			set
+			{
+				this._BillDeTails.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Bill", Storage="_Customer", ThisKey="CustomerPhoneNumber", OtherKey="CustomerPhoneNumer", IsForeignKey=true)]
 		public Customer Customer
 		{
@@ -627,122 +657,17 @@ namespace GongchaOfficial.Models
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BillDetail")]
-	public partial class BillDetail
-	{
 		
-		private int _BillId;
-		
-		private System.Nullable<int> _NumericalOrder;
-		
-		private System.Nullable<int> _Amount;
-		
-		private System.Nullable<double> _Price;
-		
-		private System.Nullable<double> _PriceTotal;
-		
-		private string _ProductId;
-		
-		public BillDetail()
+		private void attach_BillDeTails(BillDeTail entity)
 		{
+			this.SendPropertyChanging();
+			entity.Bill = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BillId", DbType="Int NOT NULL")]
-		public int BillId
+		private void detach_BillDeTails(BillDeTail entity)
 		{
-			get
-			{
-				return this._BillId;
-			}
-			set
-			{
-				if ((this._BillId != value))
-				{
-					this._BillId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumericalOrder", DbType="Int")]
-		public System.Nullable<int> NumericalOrder
-		{
-			get
-			{
-				return this._NumericalOrder;
-			}
-			set
-			{
-				if ((this._NumericalOrder != value))
-				{
-					this._NumericalOrder = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Int")]
-		public System.Nullable<int> Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this._Amount = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
-		public System.Nullable<double> Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this._Price = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PriceTotal", DbType="Float")]
-		public System.Nullable<double> PriceTotal
-		{
-			get
-			{
-				return this._PriceTotal;
-			}
-			set
-			{
-				if ((this._PriceTotal != value))
-				{
-					this._PriceTotal = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductId", DbType="VarChar(10)")]
-		public string ProductId
-		{
-			get
-			{
-				return this._ProductId;
-			}
-			set
-			{
-				if ((this._ProductId != value))
-				{
-					this._ProductId = value;
-				}
-			}
+			this.SendPropertyChanging();
+			entity.Bill = null;
 		}
 	}
 	
@@ -763,6 +688,8 @@ namespace GongchaOfficial.Models
 		private string _CollectionId;
 		
 		private EntitySet<Product> _Products;
+		
+		private EntitySet<Size> _Sizes;
 		
 		private EntityRef<Collection> _Collection;
 		
@@ -787,6 +714,7 @@ namespace GongchaOfficial.Models
 		public Category()
 		{
 			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
+			this._Sizes = new EntitySet<Size>(new Action<Size>(this.attach_Sizes), new Action<Size>(this.detach_Sizes));
 			this._Collection = default(EntityRef<Collection>);
 			this._Sex = default(EntityRef<Sex>);
 			OnCreated();
@@ -913,6 +841,19 @@ namespace GongchaOfficial.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Size", Storage="_Sizes", ThisKey="CategoryId", OtherKey="SizeId")]
+		public EntitySet<Size> Sizes
+		{
+			get
+			{
+				return this._Sizes;
+			}
+			set
+			{
+				this._Sizes.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Collection_Category", Storage="_Collection", ThisKey="CollectionId", OtherKey="CollectionId", IsForeignKey=true)]
 		public Collection Collection
 		{
@@ -1008,6 +949,18 @@ namespace GongchaOfficial.Models
 		}
 		
 		private void detach_Products(Product entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = null;
+		}
+		
+		private void attach_Sizes(Size entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = this;
+		}
+		
+		private void detach_Sizes(Size entity)
 		{
 			this.SendPropertyChanging();
 			entity.Category = null;
@@ -1812,6 +1765,8 @@ namespace GongchaOfficial.Models
 		
 		private string _CollectionId;
 		
+		private EntitySet<BillDeTail> _BillDeTails;
+		
 		private EntityRef<Category> _Category;
 		
 		private EntityRef<Collection> _Collection;
@@ -1846,6 +1801,7 @@ namespace GongchaOfficial.Models
 		
 		public Product()
 		{
+			this._BillDeTails = new EntitySet<BillDeTail>(new Action<BillDeTail>(this.attach_BillDeTails), new Action<BillDeTail>(this.detach_BillDeTails));
 			this._Category = default(EntityRef<Category>);
 			this._Collection = default(EntityRef<Collection>);
 			this._Sex = default(EntityRef<Sex>);
@@ -2064,6 +2020,19 @@ namespace GongchaOfficial.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_BillDeTail", Storage="_BillDeTails", ThisKey="ProductId", OtherKey="ProductId")]
+		public EntitySet<BillDeTail> BillDeTails
+		{
+			get
+			{
+				return this._BillDeTails;
+			}
+			set
+			{
+				this._BillDeTails.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Product", Storage="_Category", ThisKey="CategoryId", OtherKey="CategoryId", IsForeignKey=true)]
 		public Category Category
 		{
@@ -2184,6 +2153,18 @@ namespace GongchaOfficial.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_BillDeTails(BillDeTail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = this;
+		}
+		
+		private void detach_BillDeTails(BillDeTail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = null;
 		}
 	}
 	
@@ -2326,6 +2307,445 @@ namespace GongchaOfficial.Models
 		{
 			this.SendPropertyChanging();
 			entity.Sex = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Size")]
+	public partial class Size : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _SizeValue;
+		
+		private string _SizeId;
+		
+		private EntityRef<Category> _Category;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnSizeValueChanging(string value);
+    partial void OnSizeValueChanged();
+    partial void OnSizeIdChanging(string value);
+    partial void OnSizeIdChanged();
+    #endregion
+		
+		public Size()
+		{
+			this._Category = default(EntityRef<Category>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SizeValue", DbType="VarChar(10)")]
+		public string SizeValue
+		{
+			get
+			{
+				return this._SizeValue;
+			}
+			set
+			{
+				if ((this._SizeValue != value))
+				{
+					this.OnSizeValueChanging(value);
+					this.SendPropertyChanging();
+					this._SizeValue = value;
+					this.SendPropertyChanged("SizeValue");
+					this.OnSizeValueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SizeId", DbType="VarChar(10)")]
+		public string SizeId
+		{
+			get
+			{
+				return this._SizeId;
+			}
+			set
+			{
+				if ((this._SizeId != value))
+				{
+					if (this._Category.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSizeIdChanging(value);
+					this.SendPropertyChanging();
+					this._SizeId = value;
+					this.SendPropertyChanged("SizeId");
+					this.OnSizeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Size", Storage="_Category", ThisKey="SizeId", OtherKey="CategoryId", IsForeignKey=true)]
+		public Category Category
+		{
+			get
+			{
+				return this._Category.Entity;
+			}
+			set
+			{
+				Category previousValue = this._Category.Entity;
+				if (((previousValue != value) 
+							|| (this._Category.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Category.Entity = null;
+						previousValue.Sizes.Remove(this);
+					}
+					this._Category.Entity = value;
+					if ((value != null))
+					{
+						value.Sizes.Add(this);
+						this._SizeId = value.CategoryId;
+					}
+					else
+					{
+						this._SizeId = default(string);
+					}
+					this.SendPropertyChanged("Category");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BillDeTail")]
+	public partial class BillDeTail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BillId;
+		
+		private int _NumericalOrder;
+		
+		private System.Nullable<int> _Amount;
+		
+		private System.Nullable<double> _Price;
+		
+		private System.Nullable<double> _PriceTotal;
+		
+		private string _ProductId;
+		
+		private string _Size;
+		
+		private EntityRef<Bill> _Bill;
+		
+		private EntityRef<Product> _Product;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBillIdChanging(int value);
+    partial void OnBillIdChanged();
+    partial void OnNumericalOrderChanging(int value);
+    partial void OnNumericalOrderChanged();
+    partial void OnAmountChanging(System.Nullable<int> value);
+    partial void OnAmountChanged();
+    partial void OnPriceChanging(System.Nullable<double> value);
+    partial void OnPriceChanged();
+    partial void OnPriceTotalChanging(System.Nullable<double> value);
+    partial void OnPriceTotalChanged();
+    partial void OnProductIdChanging(string value);
+    partial void OnProductIdChanged();
+    partial void OnSizeChanging(string value);
+    partial void OnSizeChanged();
+    #endregion
+		
+		public BillDeTail()
+		{
+			this._Bill = default(EntityRef<Bill>);
+			this._Product = default(EntityRef<Product>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BillId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int BillId
+		{
+			get
+			{
+				return this._BillId;
+			}
+			set
+			{
+				if ((this._BillId != value))
+				{
+					if (this._Bill.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBillIdChanging(value);
+					this.SendPropertyChanging();
+					this._BillId = value;
+					this.SendPropertyChanged("BillId");
+					this.OnBillIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumericalOrder", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int NumericalOrder
+		{
+			get
+			{
+				return this._NumericalOrder;
+			}
+			set
+			{
+				if ((this._NumericalOrder != value))
+				{
+					this.OnNumericalOrderChanging(value);
+					this.SendPropertyChanging();
+					this._NumericalOrder = value;
+					this.SendPropertyChanged("NumericalOrder");
+					this.OnNumericalOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Int")]
+		public System.Nullable<int> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PriceTotal", DbType="Float")]
+		public System.Nullable<double> PriceTotal
+		{
+			get
+			{
+				return this._PriceTotal;
+			}
+			set
+			{
+				if ((this._PriceTotal != value))
+				{
+					this.OnPriceTotalChanging(value);
+					this.SendPropertyChanging();
+					this._PriceTotal = value;
+					this.SendPropertyChanged("PriceTotal");
+					this.OnPriceTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductId", DbType="VarChar(10)")]
+		public string ProductId
+		{
+			get
+			{
+				return this._ProductId;
+			}
+			set
+			{
+				if ((this._ProductId != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProductIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProductId = value;
+					this.SendPropertyChanged("ProductId");
+					this.OnProductIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size", DbType="VarChar(10)")]
+		public string Size
+		{
+			get
+			{
+				return this._Size;
+			}
+			set
+			{
+				if ((this._Size != value))
+				{
+					this.OnSizeChanging(value);
+					this.SendPropertyChanging();
+					this._Size = value;
+					this.SendPropertyChanged("Size");
+					this.OnSizeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Bill_BillDeTail", Storage="_Bill", ThisKey="BillId", OtherKey="BillId", IsForeignKey=true)]
+		public Bill Bill
+		{
+			get
+			{
+				return this._Bill.Entity;
+			}
+			set
+			{
+				Bill previousValue = this._Bill.Entity;
+				if (((previousValue != value) 
+							|| (this._Bill.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Bill.Entity = null;
+						previousValue.BillDeTails.Remove(this);
+					}
+					this._Bill.Entity = value;
+					if ((value != null))
+					{
+						value.BillDeTails.Add(this);
+						this._BillId = value.BillId;
+					}
+					else
+					{
+						this._BillId = default(int);
+					}
+					this.SendPropertyChanged("Bill");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_BillDeTail", Storage="_Product", ThisKey="ProductId", OtherKey="ProductId", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.BillDeTails.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.BillDeTails.Add(this);
+						this._ProductId = value.ProductId;
+					}
+					else
+					{
+						this._ProductId = default(string);
+					}
+					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

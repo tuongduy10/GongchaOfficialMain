@@ -17,9 +17,11 @@ namespace GongchaOfficial.Controllers
             return View();
         }
 
+        //Cart
         public List<dataCart> ListCart()
         {
             List<dataCart> cart = Session["Cart"] as List<dataCart>;
+
             if (cart == null)//Kiểm tra GIỎ HÀNG 
             {
                 cart = new List<dataCart>();
@@ -27,47 +29,91 @@ namespace GongchaOfficial.Controllers
             }
             return cart;
         }
-        public ActionResult AddToCart(string ProductId, string url)
+        //Create Cart:
+        public ActionResult Cart()
         {
             List<dataCart> listInCart = ListCart();
-            dataCart pd = listInCart.Find(p => p.ProductId == ProductId);
-        
-            if (pd == null)//Kiểm tra SẢN PHẨM trong GIỎ HÀNG
-            {        
-                pd = new dataCart(ProductId);//Tạo mới 1 sản phẩm 
-                listInCart.Add(pd);//Thêm sản phẩm vào giỏ hàng
-                return Redirect(url);
+            List<Size> listSize = db.Sizes.ToList();
+
+            if (listInCart.Count == 0)
+            {
+                return RedirectToAction("Index","Home");
             }
-            else
+            ViewBag.TotalAmount = TotalAmount();
+            ViewBag.TotalPrice = TotalPrice();
+            ViewBag.Size = listSize;
+
+            return View(listInCart);
+        }
+        //Cart Icon for _LayoutUser
+        public ActionResult CartPartial()
+        {
+            ViewBag.TotalAmount = TotalAmount();
+            ViewBag.TotalPrice = TotalPrice();
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult AddToCart(string ProductId,string size, string url)
+        {
+            //Tạo listCast và lấy sản phẩm từ Cart
+            List<dataCart> listInCart = ListCart();
+            dataCart pd = listInCart.Find(p => p.ProductId == ProductId && p.ProductSize == size);           
+
+            if (pd == null)
+            {
+                pd = new dataCart(ProductId);//Tạo mới 1 sản phẩm với ProductId được truyền vào
+                pd.ProductSize = size;
+                listInCart.Add(pd);//Thêm sản phẩm vào giỏ hàng
+            }
+            else//(pd !=null)
             {
                 pd.Amount++;
-                return Redirect(url);
             }
+                            
+            return Json("OK");
         }
-        public ActionResult UpdateFromCart(String ProductId, FormCollection frm)
+
+        [HttpPost]
+        public ActionResult UpdateAmount(int ProductPosition, int Amount, string url)
         {
             List<dataCart> listCart = ListCart();
-            dataCart pd = listCart.SingleOrDefault(p => p.ProductId == ProductId);
-            if (pd != null)
+            dataCart ps = listCart.ElementAt(ProductPosition);
+            if (ps != null)
             {
-                pd.Amount = int.Parse(frm["txtAmount"].ToString());
+                ps.Amount = Amount;
+            }
+            ViewBag.TotalAmount = TotalAmount();
+            ViewBag.TotalPrice = TotalPrice();
+            return Json("OK");
+        }
+        [HttpPost]
+        public ActionResult UpdateSize(int ProductPosition,string Size, string url)
+        {
+            List<dataCart> listCart = ListCart();
+            dataCart ps = listCart.ElementAt(ProductPosition);
+            if (ps != null)
+            {
+                ps.ProductSize = Size;
             }
 
-            return RedirectToAction("Cart");
+            return Json("OK");
         }
-        public ActionResult RemoveFromCart(string ProductId, string url)
+
+        public ActionResult RemoveFromCart(int ProductPosition, string url)
         {
             List<dataCart> listInCart = ListCart();
-            dataCart pd = listInCart.Find(p => p.ProductId == ProductId);
-            listInCart.Remove(pd);
+            dataCart ps = listInCart.ElementAt(ProductPosition);
+            listInCart.Remove(ps);
             return RedirectToAction("Cart");
         }
 
+        //Address
         [HttpGet]
         public ActionResult CustomerAddress()
         {
             //Find PhoneNumber in db CustomerAddress 
-            CustomerAddress cs = db.CustomerAddresses.FirstOrDefault(p => p.CustomerPhoneNumer == Session["PhoneNumber"].ToString());
+            CustomerAddress cs = db.CustomerAddresses.FirstOrDefault(p => p.CustomerPhoneNumer == Session["PhoneNumber"].ToString());            
             if (cs == null)
             {
                 return View();
@@ -110,7 +156,6 @@ namespace GongchaOfficial.Controllers
             else
             {
                 cs = db.CustomerAddresses.FirstOrDefault(p => p.CustomerPhoneNumer == Session["PhoneNumber"].ToString());
-                String pn = Session["PhoneNumber"].ToString();
                 if (cs != null)
                 {
                     cs.AddressProvince = province.ToString();
@@ -118,16 +163,16 @@ namespace GongchaOfficial.Controllers
                     cs.AddressNumber = number;
                     cs.AddressStreet = street;
                     cs.AddressWard = ward;
-
+                    
                     db.SubmitChanges();
                     return RedirectToAction("Order");
                 }
             }
 
-            RedirectToAction("UpdateFromCart");
             return this.CustomerAddress();
         }
 
+        //Order
         public ActionResult Order()
         {
             if (Session["Cart"] == null)
@@ -136,13 +181,54 @@ namespace GongchaOfficial.Controllers
             }
 
             List<dataCart> listInCart = ListCart();
+
             ViewBag.TotalAmount = TotalAmount();
             ViewBag.TotalPrice = TotalPrice();
-
+            ViewBag.Address = Address();
+            
             return View(listInCart);
+        }
+        //Save Order
+        public ActionResult SaveOrder()
+        {
+            List<dataCart> listInCart = ListCart();
+
+            //Add Bill
+            Bill bill = new Bill();
+            
+            bill.BillTimeSet = DateTime.Now;
+            bill.BillPrice = TotalPrice();
+            bill.CustomerPhoneNumber = Session["PhoneNumber"].ToString();
+
+            db.Bills.InsertOnSubmit(bill);
+            db.SubmitChanges();
+
+            
+            foreach(var item in listInCart)
+            {
+                //Add Bill Detail
+                BillDeTail billdetail = new BillDeTail();
+
+                billdetail.BillId = bill.BillId;
+                billdetail.NumericalOrder = listInCart.IndexOf(item)+1;
+                billdetail.ProductId = item.ProductId;
+                billdetail.Price = item.ProductPrice;
+                billdetail.Amount = item.Amount;
+                billdetail.PriceTotal = item.TotalPrice;
+                billdetail.Size = item.ProductSize;
+
+                db.BillDeTails.InsertOnSubmit(billdetail);
+            }
+
+            db.SubmitChanges();
+            Session["Cart"] = null;
+
+
+            return RedirectToAction("Index","Women");
         }
 
 
+        //Data: Price, Amount, Size
         private int TotalAmount()
         {
             int sum = 0;
@@ -165,22 +251,13 @@ namespace GongchaOfficial.Controllers
 
             return sum;
         }
-        public ActionResult Cart()
+        private String Address()
         {
-            List<dataCart> listInCart = ListCart();
-            if (listInCart.Count == 0)
-            {
-                return RedirectToAction("Index","Home");
-            }
-            ViewBag.TotalAmount = TotalAmount();
-            ViewBag.TotalPrice = TotalPrice();
-            return View(listInCart);
-        }
-        public ActionResult CartPartial()
-        {
-            ViewBag.TotalAmount = TotalAmount();
-            ViewBag.TotalPrice = TotalPrice();
-            return PartialView();
-        }
+            CustomerAddress ca;
+            ca = db.CustomerAddresses.FirstOrDefault(p => p.CustomerPhoneNumer == Session["PhoneNumber"].ToString());
+
+            return ca.AddressNumber + " " + ca.AddressStreet + ", " + ca.AddressWard + ", " + ca.AddressDistrict + ", " + ca.AddressProvince;
+        }        
+
     }
 }

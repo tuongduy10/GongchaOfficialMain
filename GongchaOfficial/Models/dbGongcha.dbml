@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GongchaOfficial" Class="dbGongchaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-6QL52A3B\SQLEXPRESS;Initial Catalog=GongchaOfficial;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GongchaOfficialConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=GongchaOfficial;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GongchaOfficialConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Admin" Member="Admins">
     <Type Name="Admin">
       <Column Name="AdminId" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -17,22 +17,10 @@
       <Column Name="BillNote" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="DiscountId" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="CustomerPhoneNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Association Name="Bill_BillDetail" Member="BillDetails" ThisKey="BillId" OtherKey="BillId" Type="BillDetail" />
+      <Association Name="Bill_BillDeTail" Member="BillDeTails" ThisKey="BillId" OtherKey="BillId" Type="BillDeTail" />
       <Association Name="Customer_Bill" Member="Customer" ThisKey="CustomerPhoneNumber" OtherKey="CustomerPhoneNumer" Type="Customer" IsForeignKey="true" />
       <Association Name="CustomerAddress_Bill" Member="CustomerAddress" ThisKey="CustomerPhoneNumber" OtherKey="CustomerPhoneNumer" Type="CustomerAddress" IsForeignKey="true" />
       <Association Name="Discount_Bill" Member="Discount" ThisKey="DiscountId" OtherKey="DiscountId" Type="Discount" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.BillDetail" Member="BillDetails">
-    <Type Name="BillDetail">
-      <Column Name="BillId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NumericalOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PriceTotal" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="ProductId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Association Name="Bill_BillDetail" Member="Bill" ThisKey="BillId" OtherKey="BillId" Type="Bill" IsForeignKey="true" />
-      <Association Name="Product_BillDetail" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Category" Member="Categories">
@@ -43,6 +31,7 @@
       <Column Name="SexId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="CollectionId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Association Name="Category_Product" Member="Products" ThisKey="CategoryId" OtherKey="CategoryId" Type="Product" />
+      <Association Name="Category_Size" Member="Sizes" ThisKey="CategoryId" OtherKey="SizeId" Type="Size" />
       <Association Name="Collection_Category" Member="Collection" ThisKey="CollectionId" OtherKey="CollectionId" Type="Collection" IsForeignKey="true" />
       <Association Name="Sex_Category" Member="Sex" ThisKey="SexId" OtherKey="SexId" Type="Sex" IsForeignKey="true" />
     </Type>
@@ -100,7 +89,7 @@
       <Column Name="CategoryId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="SexId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="CollectionId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Association Name="Product_BillDetail" Member="BillDetails" ThisKey="ProductId" OtherKey="ProductId" Type="BillDetail" />
+      <Association Name="Product_BillDeTail" Member="BillDeTails" ThisKey="ProductId" OtherKey="ProductId" Type="BillDeTail" />
       <Association Name="Category_Product" Member="Category" ThisKey="CategoryId" OtherKey="CategoryId" Type="Category" IsForeignKey="true" />
       <Association Name="Collection_Product" Member="Collection" ThisKey="CollectionId" OtherKey="CollectionId" Type="Collection" IsForeignKey="true" />
       <Association Name="Sex_Product" Member="Sex" ThisKey="SexId" OtherKey="SexId" Type="Sex" IsForeignKey="true" />
@@ -112,6 +101,27 @@
       <Column Name="Sex" Member="Sex1" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Association Name="Sex_Category" Member="Categories" ThisKey="SexId" OtherKey="SexId" Type="Category" />
       <Association Name="Sex_Product" Member="Products" ThisKey="SexId" OtherKey="SexId" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Size" Member="Sizes">
+    <Type Name="Size">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SizeValue" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SizeId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Category_Size" Member="Category" ThisKey="SizeId" OtherKey="CategoryId" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BillDeTail" Member="BillDeTails">
+    <Type Name="BillDeTail">
+      <Column Name="BillId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NumericalOrder" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PriceTotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ProductId" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Size" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Bill_BillDeTail" Member="Bill" ThisKey="BillId" OtherKey="BillId" Type="Bill" IsForeignKey="true" />
+      <Association Name="Product_BillDeTail" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -1,0 +1,71 @@
+﻿@model GongchaOfficial.Models.Category
+@{
+    ViewBag.Title = "DeleteCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DeleteCategory</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+        @if (Model.CategoryStatus == "open")
+        {
+            <dd style="color:#00FF00;">
+                @Html.DisplayFor(model => model.CategoryStatus)
+            </dd>
+        }
+        else if (Model.CategoryStatus == "close")
+        {
+            <dd style="color:red;">
+                @Html.DisplayFor(model => model.CategoryStatus)
+            </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.CategoryStatus)
+            </dd>
+        }
+
+        <dt>
+            Sex
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sex.Sex1)
+        </dd>
+
+        <dt>
+            Collection
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "CategoryIndex")
+        </div>
+    }
+</div>
