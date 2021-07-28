@@ -77,6 +77,7 @@
                 }
                 function sizeChange(position, index, url) {
                     var size = document.querySelector(`#size-${index}`).value
+
                     $.post("/Cart/UpdateSize", { ProductPosition: position, Size: size, url: url }, function (data, status) {
                         if (status == "success") {
                             window.location = url
@@ -117,7 +118,6 @@
                 }
             </div>
         </a>
-
 
     </div>
 </div>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<GongchaOfficial.Models.BillDeTail>
+@{
+    ViewBag.Title = "Bill";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<!-- Bill -->
+<div class="grid__row">
+    <div class="bill">
+        <div class="bill_info">
+            <ul>
+                <li><h3>@ViewBag.UserName</h3></li>
+                <li>@Session["PhoneNumber"]</li>
+                <li><i class="fas fa-map-marker-alt"></i> @ViewBag.Address</li>
+                <li>Payment methods: Cash on delivery</li>
+            </ul>
+        </div>
+        <hr style="margin-left: 40px; margin-right: 40px;">
+        @foreach (var item in Model)
+        {
+            <div class="bill_listproduct">
+                <div class="bill_product">
+                    <p>@item.NumericalOrder .</p>
+                    <p>@item.Product.ProductName (@item.Size)</p>
+                    <p>x @item.Amount</p>
+                    <p>@string.Format("{0:0,0 VNĐ}", item.Price)</p>
+                </div>
+
+            </div>
+        }
+        <hr style="margin-left: 40px; margin-right: 40px;">
+        <div class="bill_deliveryinfo">
+            <div style="display: flex;justify-content: space-between;"><p>Amount:</p> <p>@ViewBag.TotalAmount</p></div>
+            <div style="display: flex;justify-content: space-between;"><p>Total price:</p> <p>@string.Format("{0:0,0 VNĐ}", ViewBag.TotalPrice)</p></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bill {
+        width: 500px;
+        height: 500px;
+        background-color: #ddd;
+        margin: auto;
+    }
+
+    .bill_info ul li {
+        padding: 10px 0;
+    }
+
+    .bill_deliveryinfo,
+    .bill_listproduct {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+        .bill_listproduct p {
+            padding: 10px 0;
+        }
+
+    .bill_deliveryinfo {
+        margin-top: 10px;
+    }
+
+    .bill_product {
+        margin: auto;
+        display: flex;
+        justify-content: space-between
+    }
+</style>
+

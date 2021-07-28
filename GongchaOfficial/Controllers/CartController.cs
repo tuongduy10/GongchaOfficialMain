@@ -91,6 +91,7 @@ namespace GongchaOfficial.Controllers
         public ActionResult UpdateSize(int ProductPosition,string Size, string url)
         {
             List<dataCart> listCart = ListCart();
+
             dataCart ps = listCart.ElementAt(ProductPosition);
             if (ps != null)
             {
@@ -221,11 +222,29 @@ namespace GongchaOfficial.Controllers
             }
 
             db.SubmitChanges();
+
             Session["Cart"] = null;
-
-
-            return RedirectToAction("Index","Women");
+            return RedirectToAction("Bill","Cart");     
         }
+
+        public ActionResult Bill()
+        {
+            var id = (from i in db.Bills.OrderByDescending(p => p.BillId) select i).First();
+
+            var billdetail = db.BillDeTails.Where(p => p.BillId == id.BillId).ToList();
+            var amount = db.BillDeTails.Where(p => p.BillId == id.BillId).Sum(p => p.Amount);
+            var totalprice = db.BillDeTails.Where(p => p.BillId == id.BillId).Sum(p => p.PriceTotal);
+            Customer cs = db.Customers.FirstOrDefault(p => p.CustomerPhoneNumer == Session["PhoneNumber"].ToString()); 
+
+            ViewBag.TotalAmount = amount;
+            ViewBag.TotalPrice = totalprice;
+            ViewBag.Address = Address();
+            ViewBag.UserName = cs.CustomerName;
+
+            return View(billdetail);
+            
+        }
+
 
 
         //Data: Price, Amount, Size

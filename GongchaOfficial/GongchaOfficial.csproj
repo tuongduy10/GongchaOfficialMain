@@ -430,6 +430,7 @@
     <Content Include="Views\Shared\_LoginAdminPartial.cshtml" />
     <Content Include="Views\ComingSoon\Index.cshtml" />
     <Content Include="Views\Services\GioiThieu.cshtml" />
+    <Content Include="Views\Cart\Bill.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
